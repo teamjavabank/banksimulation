@@ -3,12 +3,16 @@ package bankSimulation;
 import java.util.*;
 
 public class Database {
-	
+
+	//Create Maps
 	private Map<Integer, Customer> customerList = new HashMap<>();
 	private Map<Integer, Account> accountList = new HashMap<>();
+	private Map<Integer, Transaction> transactionList = new HashMap<>();
+
+	//Variables for IDs
 	private int cid, aid, tid;
 	
-	// Constructor
+	//Constructor
 	public Database() {
 		cid = 0;
 		aid = 0;
@@ -43,14 +47,29 @@ public class Database {
 
 	//getAccount
 	public Account getAccount (int accountId ) {
-		return customerList.get(accountId);
+		return accountist.get(accountId);
 	}
 
 	//removeAccount
 	public Account removeAccount (int accountId) {
-		return customerList.remove(accountId);
+		return accountList.remove(accountId);
 	}
 
-	//Transaction
-	
+	/* --- Transaction --- */
+
+	//setTransaction
+	public Transaction setTransaction(Transaction t) {
+		tid++;
+		return transactionList.put(tid-1, t);
+	}
+
+	//getTransaction
+	public Transaction getTransaction (int transactionId ) {
+		return transactionList.get(transactionId);
+	}
+
+	//removeTransaction
+	public Transaction removeTransaction (int transactionId) {
+		return transactionList.remove(transactionId);
+	}
 }
