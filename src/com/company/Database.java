@@ -68,6 +68,9 @@ public class Database {
 		return transactionList.get(transactionId);
 	}
 
+	//getTransactions
+	
+
 	//removeTransaction
 	public Transaction removeTransaction (int transactionId) {
 		return transactionList.remove(transactionId);
