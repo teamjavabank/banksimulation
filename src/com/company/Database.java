@@ -47,7 +47,7 @@ public class Database {
 
 	//getAccount
 	public Account getAccount (int accountId ) {
-		return accountist.get(accountId);
+		return accountList.get(accountId);
 	}
 
 	//removeAccount
@@ -70,6 +70,6 @@ public class Database {
 
 	//getTransactionLog
 	public Map<Integer, Transaction> getTransactionLog () {
-		return transactionList
+		return transactionList;
 	}
 }

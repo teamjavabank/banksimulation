@@ -10,15 +10,28 @@ public class Customer {
 	private String sex;
 	private String dob;
 	private List<Integer> AccountList;
-	private int customerId;
 
-	public Customer (String newName, String newAddress, String newPhone, String newSex, String newDob)
+	//
+	public Customer ()
 	{
-		this.name = newName;
-		this.address = newAddress;
-		this.phone = newPhone;
-		this.sex = newSex;
-		this.dob = newDob;
+		Scanner inputScanner = new Scanner(System.in);
+		String inputs;
+
+		System.out.println("insert your name!");
+		inputs =  (String) inputScanner.next();
+		this.name = inputs;
+		System.out.println("insert your address!");
+		inputs =  (String) inputScanner.next();
+		this.address = inputs;
+		System.out.println("insert your phonenumber!");
+		inputs =  (String) inputScanner.next();
+		this.phone = inputs;
+		System.out.println("insert your gender!");
+		inputs =  (String) inputScanner.next();
+		this.sex = inputs;
+		System.out.println("insert your date of birth! (DD/MM/YYYY)");
+		inputs =  (String) inputScanner.next();
+		this.dob = inputs;
 		this.AccountList = new ArrayList<>();
 	}
 
@@ -30,7 +43,9 @@ public class Customer {
 		d.setCustomer(c);
 
 	}
-
+	// -------------------------------------------------
+	// prints all personal details
+	// -------------------------------------------------
 	public static void showPersonDetails (int customerId, Database d)
 	{
 
@@ -45,7 +60,9 @@ public class Customer {
 		}
 
 	}
-
+	// -------------------------------------------------
+	// updates personal details by checking each value
+	// -------------------------------------------------
 	public static void updatePersonDetails (int customerId, Database d)
 	{
 
@@ -54,48 +71,56 @@ public class Customer {
 
 		Scanner inputScanner = new Scanner(System.in);
 
-		System.out.println("Current name: " + oldCustomer.name + ". Changes?");
-		String input = inputScanner.nextLine();
-		if (!(input.equals(""))){
-			newCustomer.name = input;
-		}
+		boolean update = true;
+		while(update)
+		{
+			System.out.println("Your current personal details arrrrrr: " + oldCustomer.name + " , " + oldCustomer.address + " , " + oldCustomer.phone + " , "  + oldCustomer.sex  + " , " + oldCustomer.dob);
+			System.out.println("Press a number to change a value: name (1), address (2), phone(3), sex (4), dob(5)");
+			System.out.println("To exit the updating sesson press 0.");
+			String input = inputScanner.next();
+			String newvalue;
 
-		System.out.println("Current address: " + oldCustomer.address + ". Changes?");
-		input = inputScanner.nextLine();
-		if (!(input.equals(""))){
-			newCustomer.address = input;
+			if (input.equals("0")){
+				update = false;
+				System.out.println("Updating stopped, changes are saved.");
+			}
+			else if (input.equals("1")){
+				System.out.println("insert new value!");
+				newvalue = (String) inputScanner.next();
+				newCustomer.name = newvalue;
+			}
+			else if (input.equals("2")){
+				System.out.println("insert new value!");
+				newvalue =  (String) inputScanner.next();
+				newCustomer.address = newvalue;
+			}
+			else if (input.equals("3")){
+				System.out.println("insert new value!");
+				newvalue =  (String) inputScanner.next();
+				newCustomer.phone = newvalue;
+			}
+			else if (input.equals("4")){
+				System.out.println("insert new value!");
+				newvalue =  (String) inputScanner.next();
+				newCustomer.sex = newvalue;
+			}
+			else if (input.equals("5")){
+				System.out.println("insert new value!");
+				newvalue =  (String) inputScanner.next();
+				newCustomer.dob = newvalue;
+			}
+			else {
+				System.out.println("please enter a number between 0 and 5 ");
+			}
 		}
-
-		System.out.println("Current phone: " + oldCustomer.phone + ". Changes?");
-		input = inputScanner.nextLine();
-		if (!(input.equals(""))){
-			newCustomer.phone = input;
-		}
-
-		System.out.println("Current sex: " + oldCustomer.sex + ". Changes?");
-		input = inputScanner.nextLine();
-		if (!(input.equals(""))){
-			newCustomer.sex = input;
-		}
-
-		System.out.println("Current dob: " + oldCustomer.dob + ". Changes?");
-		input = inputScanner.nextLine();
-		if (!(input.equals(""))){
-			newCustomer.dob = input;
-		}
-
-		newCustomer.AccountList = oldCustomer.AccountList;
-		newCustomer.customerId = customerId;
 
 		oldCustomer = newCustomer;
 	}
 
-	public void removeCustomer (int customerId, Database d)
+	public static void removeCustomer (int customerId, Database d)
 	{
 
 		d.removeCustomer(customerId);
 
 	}
-
-
 }

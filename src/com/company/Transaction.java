@@ -3,13 +3,14 @@ package com.company;
 import java.util.Scanner;
 import java.sql.Timestamp;
 import java.util.Date;
+import java.text.SimpleDateFormat;
 
 public class Transaction {
 
 	private int sender;
 	private int receiver;
 	private double amount;
-	private Date timestamp;
+	private String timestamp;
 
 	public Transaction (int User)
 	{
@@ -17,7 +18,8 @@ public class Transaction {
 		this.sender = newSender;
 		this.receiver = newReceiver;
 		this.amount = newAmount;
-		this.timestamp = ;
+		this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
 	}
 
 	public static void addNewTransaction (Transaction t, Database d)
