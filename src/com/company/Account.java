@@ -1,3 +1,4 @@
+package com.company;
 
 public class Account {
 	
@@ -25,7 +26,7 @@ public class Account {
 	
 	/* --- Balance --- */
 	public void showBalance (int accountId, Database d) {
-		int value = d.getAccount(accountId).balance;
+		double value = d.getAccount(accountId).balance;
 		
 		System.out.println("Current Balance: " + value);
 	}
