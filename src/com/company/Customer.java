@@ -1,4 +1,4 @@
-package bankSimulation;
+package com.company;
 
 import java.util.*;
 

@@ -1,4 +1,4 @@
-package bankSimulation;
+package com.company;
 
 import java.util.*;
 
@@ -68,11 +68,8 @@ public class Database {
 		return transactionList.get(transactionId);
 	}
 
-	//getTransactions
-	
-
-	//removeTransaction
-	public Transaction removeTransaction (int transactionId) {
-		return transactionList.remove(transactionId);
+	//getTransactionLog
+	public Map<Integer, Transaction> getTransactionLog () {
+		return transactionList
 	}
 }
