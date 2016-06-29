@@ -9,9 +9,9 @@ public class Account {
 	private String accountType;
 	private int customerId;
 	
-	public Account (String inAccountType, int inCustomerId) {
-		this.accountType = inAccountType;
-		this.customerId = inCustomerId;
+	public Account (String newAccountType, int newCustomerId) {
+		this.accountType = newAccountType;
+		this.customerId = newCustomerId;
 		this.balance = 0;
 	}
 	
@@ -37,7 +37,7 @@ public class Account {
 		System.out.println("Current Balance: " + value);
 	}
 	
-	public void addMoney (double value ,int accountId, Database d) {
+	public void addMoney (double value, int accountId, Database d) {
 		d.getAccount(accountId).balance += value;
 	}
 	

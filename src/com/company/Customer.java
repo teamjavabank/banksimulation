@@ -37,8 +37,7 @@ public class Customer {
 		inputs =  (String) inputScanner.next();
 		this.pin = inputs;
 		this.AccountList = new ArrayList<>();
-		
-		inputScanner.close();
+	
 	}
 
 	public static void addNewCustomer (Customer c, Database d)
@@ -140,7 +139,6 @@ public class Customer {
 
 		oldCustomer = newCustomer;
 		
-		inputScanner.close();
 	}
 
 	public static void removeCustomer (int customerId, Database d)
