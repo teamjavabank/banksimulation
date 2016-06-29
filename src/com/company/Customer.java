@@ -4,7 +4,7 @@ import java.util.*;
 
 public class Customer {
 
-	public String name;
+	private String name;
 	private String address;
 	private String phone;
 	private String sex;
@@ -48,6 +48,7 @@ public class Customer {
 		d.setCustomer(c);
 
 	}
+	
 	// -------------------------------------------------
 	// prints all personal details
 	// -------------------------------------------------
@@ -79,7 +80,7 @@ public class Customer {
 		boolean update = true;
 		while(update)
 		{
-			System.out.println("Your current personal details arrrrrr: " + oldCustomer.name + " , " + oldCustomer.address + " , " + oldCustomer.phone + " , "  + oldCustomer.sex  + " , " + oldCustomer.dob);
+			System.out.println("Your current personal details are: " + oldCustomer.name + " , " + oldCustomer.address + " , " + oldCustomer.phone + " , "  + oldCustomer.sex  + " , " + oldCustomer.dob);
 			System.out.println("Press a number to change a value: name (1), address (2), phone(3), sex (4), dob(5), pin(6)");
 			System.out.println("To exit the updating sesson press 0.");
 			String input = inputScanner.next();
@@ -146,5 +147,14 @@ public class Customer {
 
 		d.removeCustomer(customerId);
 
+	}
+	
+	public static List<Integer> getAccounts (int customerId, Database d)
+	{
+		
+		Customer c = d.getCustomer(customerId);
+		
+		return c.AccountList;
+			
 	}
 }
