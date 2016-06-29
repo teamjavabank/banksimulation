@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.*;
-import java.io.*;
 
 public class Customer {
 
@@ -94,10 +93,10 @@ public class Customer {
 	// -------------------------------------------------
 	// prints all personal details
 	// -------------------------------------------------
-	public void showPersonDetails (Database d)
+	public void showPersonDetails (Database db)
 	{
 
-		Customer details = d.getCustomer(this.customerId);
+		Customer details = db.getCustomer(this.customerId);
 
 		System.out.println(details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
 		for (int account: details.AccountList)
