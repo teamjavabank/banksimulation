@@ -9,23 +9,21 @@ public class Account {
 	private String accountType;
 	private int customerId;
 	
-	public Account (String newAccountType, int newCustomerId) {
+	public Account (String newAccountType, int newCustomerId, Database db) {
 		this.accountType = newAccountType;
 		this.customerId = newCustomerId;
 		this.balance = 0;
+		
+		int accountId = db.setAccount(this);
+		int customerId = this.customerId;
+		
+		Customer.addAccount(customerId, accountId, db);
 	}
 	
-	/* --- Open/Close Account --- */
+	/* --- Close Account --- */
 	// -------------------------------------------------
-	// for opening and closing a account
+	// for closing a account
 	// -------------------------------------------------
-	public void openAccount (Database d) {
-		int id = d.setAccount(this);
-		int cId = this.customerId;
-		
-		Customer.addAccount(cId, id, d);
-		
-	}
 	
 	public void closeAccount (int accountId, Database d) {
 		d.removeAccount(accountId);
@@ -66,3 +64,4 @@ public class Account {
 		
 	}
 }
+
