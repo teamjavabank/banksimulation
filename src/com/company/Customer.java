@@ -1,6 +1,7 @@
 package com.company;
 
 import java.util.*;
+import java.io.*;
 
 public class Customer {
 
@@ -13,36 +14,82 @@ public class Customer {
 	private String pin;
 	private int customerId;
 
+	
 
-	public Customer (Database db)
-	{
-		
+
+	//
+	public Customer(Database db) {
 		Scanner inputScanner = new Scanner(System.in);
 		String inputs;
+		boolean[] checklist = new boolean[6];
+		for (int c = 0; c < 6; c++) {
+			checklist[c] = false;
+		}
+		while (checklist[0] == false) {
+			System.out.println("insert your name!");
+			inputs = (String) inputScanner.next();
+			if (inputs.length() >= 3 && inputs.length() < 25) {
+				this.name = inputs;
+				checklist[0] = true;
+			} else {
+				System.out.println("please enter a name between 3 and 25 characters");
+			}
+		}
 
-		System.out.println("insert your name!");
-		inputs =  (String) inputScanner.next();
-		this.name = inputs;
-		System.out.println("insert your address!");
-		inputs =  (String) inputScanner.next();
-		this.address = inputs;
-		System.out.println("insert your phonenumber!");
-		inputs =  (String) inputScanner.next();
-		this.phone = inputs;
-		System.out.println("insert your gender!");
-		inputs =  (String) inputScanner.next();
-		this.sex = inputs;
-		System.out.println("insert your date of birth! (DD.MM.YYYY)");
-		inputs =  (String) inputScanner.next();
+		while (checklist[1] == false) {
+			System.out.println("insert your address!");
+			inputs = (String) inputScanner.next();
+			if (inputs.length() >= 5 && inputs.length() < 40) {
+				this.address = inputs;
+				checklist[1] = true;
+			} else {
+				System.out.println("please enter a name between 5 and 40 characters");
+			}
+		}
+		while (checklist[2] == false) {
+			System.out.println("insert your phone number!");
+			inputs = (String) inputScanner.next();
+			if (inputs.length() >= 9 && inputs.length() < 21) {
+				this.phone = inputs;
+				checklist[2] = true;
+			} else {
+				System.out.println("please enter a number between 9 and 20 characters");
+			}
+		}
+		while (checklist[3] == false) {
+			System.out.println("insert your gender!");
+			inputs = (String) inputScanner.next();
+			if (inputs.equals("male") || inputs.equals("female")) {
+				this.sex = inputs;
+				checklist[3] = true;
+			} else {
+				System.out.println("please write if you are a ``male`` or a ``female``");
+			}
+		}
+
+		System.out.println("insert your date of birth! (DD/MM/YYYY)");
+		inputs = (String) inputScanner.next();
 		this.dob = inputs;
-		System.out.println("insert your PIN! ");
-		inputs =  (String) inputScanner.next();
-		this.pin = inputs;
+
+		while (checklist[5] == false) {
+			System.out.println("insert your PIN!");
+			inputs = (String) inputScanner.next();
+			if (inputs.length() >= 4) {
+				this.pin = inputs;
+				checklist[5] = true;
+			} else {
+				System.out.println("your PIN has to be at least 4 characters long");
+			}
+		}
+		
 		this.AccountList = new ArrayList<>();
 		
 		this.customerId = db.setCustomer(this);
-	
+
 	}
+	
+
+	
 	
 	// -------------------------------------------------
 	// prints all personal details
