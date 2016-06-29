@@ -6,9 +6,7 @@ public class Main {
 	
     	Database db = new Database();
     	
-    	Customer c = new Customer();
-
-		Customer.addNewCustomer(c, db);
+    	Customer c = new Customer(db);
     	
     	StudentSavings s = new StudentSavings("student", 1);
     	
