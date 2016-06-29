@@ -57,7 +57,7 @@ public class Account {
 		this.creditLimit = creditLimit;
 	}
 	
-	public int getCreditLimit (int accountId, Database db)
+	public static int getCreditLimit (int accountId, Database db)
 	{
 		
 		Account acc = db.getAccount(accountId);
