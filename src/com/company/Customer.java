@@ -13,8 +13,9 @@ public class Customer {
 	private String pin;
 
 	//
-	public Customer ()
+	public Customer (Database db)
 	{
+		
 		Scanner inputScanner = new Scanner(System.in);
 		String inputs;
 
@@ -37,18 +38,10 @@ public class Customer {
 		inputs =  (String) inputScanner.next();
 		this.pin = inputs;
 		this.AccountList = new ArrayList<>();
+		
+		db.setCustomer(this);
 	
 	}
-
-	public static void addNewCustomer (Customer c, Database d)
-	{
-
-		// ID is generated in database
-
-		d.setCustomer(c);
-
-	}
-	
 	// -------------------------------------------------
 	// prints all personal details
 	// -------------------------------------------------
