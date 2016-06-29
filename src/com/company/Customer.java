@@ -165,4 +165,13 @@ public class Customer {
 		return c.dob;
 		
 	}
+	
+	public static void addAccount (int customerId, int accountId, Database d)
+	{
+		
+		Customer c = d.getCustomer(customerId);
+		
+		c.AccountList.add(accountId);
+		
+	}
 }
