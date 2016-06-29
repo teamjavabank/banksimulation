@@ -20,14 +20,16 @@ public class Transaction {
 		System.out.println("Press a number to select your desired function: transfer (1), deposit (2), withdraw (3)");
 		System.out.println("To exit the transaction sesson press 0.");
 
-		String input = inputScanner.next();
+        int input;
+        while (!inputScanner.hasNextInt()) inputScanner.next();
+        input = inputScanner.nextInt();
 
 		switch (input) {
-			case "1":  transferTransaction(customerId, d);
+			case 1:  transferTransaction(customerId, d);
 				break;
-			case "2":  depositTransaction(customerId, d);
+			case 2:  depositTransaction(customerId, d);
 				break;
-			case "3":  withdrawTransaction(customerId, d);
+			case 3:  withdrawTransaction(customerId, d);
 				break;
 			default: System.out.println("Please select a valid option!");
 				break;
@@ -52,8 +54,8 @@ public class Transaction {
 
 	private void transferTransaction (int customerId, Database d)
 	{
-		boolean update = true;
-		while(update) {
+		boolean transfer = true;
+		while(transfer) {
 
             //Define input scanner
 			Scanner inputScanner = new Scanner(System.in);
@@ -69,69 +71,81 @@ public class Transaction {
 			System.out.println("Press (0) to exit.");
 
             //Let the user select a sender account
-			boolean validsender = false;
-			while (!validsender) {
+			while (true) {
 
 				while (!inputScanner.hasNextInt()) inputScanner.next();
 				input = inputScanner.nextInt();
 				try {
 					if (input == 0) {
-						validsender = true;
-						update = false;
-						System.out.println("Transfer stopped, returning to last menu.");
+                        System.out.println("Transfer stopped, returning to last menu.");
+                        transfer = false;
+						break;
 					} else {
 						int sender = UserAccountList.get(input - 1);
-						validsender = true;
                         System.out.printf("Selected sender account %d.\n", sender);
+						break;
 					}
 				} catch (IndexOutOfBoundsException e) {
 					System.out.println("Please select a valid account!");
 				}
 			}
+            if(!transfer){
+                break;
+            }
 
             //Let the user select a receiver account
 			Map<Integer, Account> AccountList = d.getAccountList();
 			System.out.println("To which account do you want to transfer?");
 			System.out.println("Press (0) to exit.");
 
-			boolean validreceiver = false;
-			while (!validreceiver) {
+			while (true) {
 				while (!inputScanner.hasNextInt()) inputScanner.next();
 				input = inputScanner.nextInt();
 				if (input == 0) {
-					validreceiver = true;
-					update = false;
+					transfer = false;
 					System.out.println("Transfer stopped, returning to last menu.");
+                    break;
 				} else if (AccountList.containsValue(input)) {
 					int receiver = input;
-					validreceiver = true;
                     System.out.printf("Selected receiver account %d.\n", receiver);
+                    break;
 				} else {
 					System.out.println("Please input a valid account!");
 				}
 			}
+            if(!transfer){
+                break;
+            }
 
             //Let the user select an amount to transfer
             double UserAccountBalance = Account.getBalance(sender, d);
+            System.out.printf("Current balance of account %d: %f?\n", sender, UserAccountBalance);
             System.out.printf("Which amount do you want to transfer from the account %d to the account %d?\n", sender, receiver);
             System.out.println("Press (0) to exit.");
 
-            boolean validamount = false;
-            while (!validamount) {
+            while (true) {
                 while (!inputScanner.hasNextDouble()) inputScanner.next();
                 double input2 = inputScanner.nextDouble();
                 if (input2 == 0) {
-                    validreceiver = true;
-                    update = false;
+                    transfer = false;
                     System.out.println("Transfer stopped, returning to last menu.");
-                } else if (AccountList.containsValue(input2)) {
-                    int receiver = input;
-                    validreceiver = true;
-                    System.out.printf("Selected receiver account %d.\n", receiver);
-                } else {
-                    System.out.println("Please input a valid account!");
+                    break;
+                } else if(input2 <= 0) {
+                    System.out.println("Amount must be a positive number!");
+                    continue;
+                } else if(input2 > UserAccountBalance) {
+                    System.out.println("Amount can not exceed your account balance!");
+                    continue;
+                } else  {
+                    double amount = input2;
+                    System.out.printf("Amount to transfer: %f.\n", amount);
+                    break;
                 }
             }
+            if(!transfer){
+                break;
+            }
+            transfer = false;
 		}
 
 	}
