@@ -12,8 +12,9 @@ public class TestTransaction {
 		Database database = new Database();
 		Customer customer = new Customer();
 		Customer.addNewCustomer(customer, database);
-		Account
+		StudentSavings s = new StudentSavings("student", 1000);
+		s.openAccount(database);
 
-		new Transaction(0, database);
+		new Transaction(1000, database);
 	}
 }

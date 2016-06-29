@@ -7,14 +7,14 @@ public class Main {
     	Database db = new Database();
     	
     	Customer c = new Customer();
+
+		Customer.addNewCustomer(c, db);
     	
-    	db.setCustomer(c);
-    	
-    	StudentSavings s = new StudentSavings("student", 0);
+    	StudentSavings s = new StudentSavings("student", 1);
     	
     	s.openAccount(db);
     	
-    	c.showPersonDetails(0, db);
+    	c.showPersonDetails(1000, db);
     	
     }
 }
