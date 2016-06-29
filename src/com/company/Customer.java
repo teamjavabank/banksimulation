@@ -38,6 +38,7 @@ public class Customer {
 		this.pin = inputs;
 		this.AccountList = new ArrayList<>();
 		
+		inputScanner.close();
 	}
 
 	public static void addNewCustomer (Customer c, Database d)
@@ -131,7 +132,6 @@ public class Customer {
 				}else{
 					System.out.println("The PINs did not match!");
 				}
-				newCustomer.dob = newvalue;
 			}
 			else {
 				System.out.println("please enter a number between 0 and 5 ");
@@ -140,6 +140,7 @@ public class Customer {
 
 		oldCustomer = newCustomer;
 		
+		inputScanner.close();
 	}
 
 	public static void removeCustomer (int customerId, Database d)
