@@ -14,9 +14,9 @@ public class Database {
 	
 	//Constructor
 	public Database() {
-		cid = 0;
-		aid = 0;
-		tid = 0;
+		cid = 1000;
+		aid = 1000;
+		tid = 1000;
 	}
 
 	/* --- Customer --- */
