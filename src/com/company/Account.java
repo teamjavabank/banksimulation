@@ -31,7 +31,7 @@ public class Account {
 	// -------------------------------------------------
 	// to show current balance and increase the balance
 	// -------------------------------------------------
-	public void showBalance (int accountId, Database d) {
+	public static void showBalance (int accountId, Database d) {
 		double value = d.getAccount(accountId).balance;
 		
 		System.out.println("Current Balance: " + value);
