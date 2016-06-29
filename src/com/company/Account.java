@@ -19,8 +19,12 @@ public class Account {
 	// -------------------------------------------------
 	// for opening and closing a account
 	// -------------------------------------------------
-	public void openAccount (Account a, Database d) {
-		d.setAccount(a);
+	public void openAccount (Database d) {
+		int id = d.setAccount(this);
+		int cId = this.customerId;
+		
+		Customer.addAccount(cId, id, d);
+		
 	}
 	
 	public void closeAccount (int accountId, Database d) {

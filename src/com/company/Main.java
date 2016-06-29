@@ -10,9 +10,11 @@ public class Main {
     	
     	db.setCustomer(c);
     	
-    	Customer.updatePersonDetails(0, db);
+    	StudentSavings s = new StudentSavings("student", 0);
     	
-    	Customer.showPersonDetails(0, db);
+    	s.openAccount(db);
+    	
+    	c.showPersonDetails(0, db);
     	
     }
 }
