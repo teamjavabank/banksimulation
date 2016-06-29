@@ -40,9 +40,10 @@ public class Database {
 	/* --- Account --- */
 
 	//setAccount
-	public Account setAccount(Account a) {
+	public int setAccount(Account a) {
 		aid++;
-		return accountList.put(aid-1, a);
+		accountList.put(aid-1, a);
+		return aid-1;
 	}
 
 	//getAccount
@@ -53,6 +54,11 @@ public class Database {
 	//removeAccount
 	public Account removeAccount (int accountId) {
 		return accountList.remove(accountId);
+	}
+
+	//getAccountList
+	public Map<Integer, Account> getAccountList () {
+		return accountList;
 	}
 
 	/* --- Transaction --- */

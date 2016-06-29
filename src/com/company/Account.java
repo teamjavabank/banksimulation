@@ -31,10 +31,10 @@ public class Account {
 	// -------------------------------------------------
 	// to show current balance and increase the balance
 	// -------------------------------------------------
-	public static void showBalance (int accountId, Database d) {
+	public static double getBalance (int accountId, Database d) {
 		double value = d.getAccount(accountId).balance;
-		
-		System.out.println("Current Balance: " + value);
+
+		return value;
 	}
 	
 	public void addMoney (double value, int accountId, Database d) {
