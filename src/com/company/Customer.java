@@ -10,6 +10,7 @@ public class Customer {
 	private String sex;
 	private String dob;
 	private List<Integer> AccountList;
+	private String pin;
 
 	//
 	public Customer ()
@@ -32,6 +33,9 @@ public class Customer {
 		System.out.println("insert your date of birth! (DD/MM/YYYY)");
 		inputs =  (String) inputScanner.next();
 		this.dob = inputs;
+		System.out.println("insert your PIN! ");
+		inputs =  (String) inputScanner.next();
+		this.pin = inputs;
 		this.AccountList = new ArrayList<>();
 		
 	}
@@ -76,7 +80,7 @@ public class Customer {
 		while(update)
 		{
 			System.out.println("Your current personal details arrrrrr: " + oldCustomer.name + " , " + oldCustomer.address + " , " + oldCustomer.phone + " , "  + oldCustomer.sex  + " , " + oldCustomer.dob);
-			System.out.println("Press a number to change a value: name (1), address (2), phone(3), sex (4), dob(5)");
+			System.out.println("Press a number to change a value: name (1), address (2), phone(3), sex (4), dob(5), pin(6)");
 			System.out.println("To exit the updating sesson press 0.");
 			String input = inputScanner.next();
 			String newvalue;
@@ -108,6 +112,24 @@ public class Customer {
 			else if (input.equals("5")){
 				System.out.println("insert new value!");
 				newvalue =  (String) inputScanner.next();
+				newCustomer.dob = newvalue;
+			}
+			else if (input.equals("6")){
+				System.out.println("insert new pin!");
+				newvalue =  (String) inputScanner.next();
+				System.out.println("repeat new pin!");
+				String newvalue2 =  (String) inputScanner.next();
+				if(newvalue.equals(newvalue2)){
+					System.out.println("insert old pin!");
+					newvalue =  (String) inputScanner.next();
+					if((oldCustomer.pin).equals(newvalue)){
+						newCustomer.pin = newvalue2;
+					}else{
+						System.out.println("Old PIN was not correct!");
+					}
+				}else{
+					System.out.println("The PINs did not match!");
+				}
 				newCustomer.dob = newvalue;
 			}
 			else {
