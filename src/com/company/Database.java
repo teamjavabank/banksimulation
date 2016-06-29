@@ -22,9 +22,10 @@ public class Database {
 	/* --- Customer --- */
 
 	//setCustomer
-	public Customer setCustomer (Customer c) {
+	public int setCustomer (Customer c) {
 		cid++;
-		return customerList.put(cid-1, c);
+		customerList.put(cid-1, c);
+		return cid-1;
 	}
 
 	//getCustomer

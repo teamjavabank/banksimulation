@@ -11,8 +11,9 @@ public class Customer {
 	private String dob;
 	private List<Integer> AccountList;
 	private String pin;
+	private int customerId;
 
-	//
+
 	public Customer (Database db)
 	{
 		
@@ -39,16 +40,17 @@ public class Customer {
 		this.pin = inputs;
 		this.AccountList = new ArrayList<>();
 		
-		db.setCustomer(this);
+		this.customerId = db.setCustomer(this);
 	
 	}
+	
 	// -------------------------------------------------
 	// prints all personal details
 	// -------------------------------------------------
-	public static void showPersonDetails (int customerId, Database d)
+	public void showPersonDetails (Database d)
 	{
 
-		Customer details = d.getCustomer(customerId);
+		Customer details = d.getCustomer(this.customerId);
 
 		System.out.println(details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
 		for (int account: details.AccountList)

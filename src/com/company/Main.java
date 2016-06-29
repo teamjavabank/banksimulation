@@ -8,11 +8,11 @@ public class Main {
     	
     	Customer c = new Customer(db);
     	
-    	StudentSavings s = new StudentSavings("student", 1);
+    	StudentSavings s = new StudentSavings("student", 1000);
     	
     	s.openAccount(db);
     	
-    	c.showPersonDetails(1000, db);
+    	c.showPersonDetails(db);
     	
     }
 }
