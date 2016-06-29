@@ -156,4 +156,13 @@ public class Customer {
 		return c.AccountList;
 			
 	}
+	
+	public static String getDob (int customerId, Database d)
+	{
+		
+		Customer c = d.getCustomer(customerId);
+		
+		return c.dob;
+		
+	}
 }
