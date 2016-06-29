@@ -14,9 +14,6 @@ public class Customer {
 	private int customerId;
 
 	
-
-
-	//
 	public Customer(Database db) {
 		Scanner inputScanner = new Scanner(System.in);
 		String inputs;
@@ -182,10 +179,10 @@ public class Customer {
 		
 	}
 
-	public static void removeCustomer (int customerId, Database d)
+	public void removeCustomer (Database d)
 	{
 
-		d.removeCustomer(customerId);
+		d.removeCustomer(this.customerId);
 
 	}
 	
