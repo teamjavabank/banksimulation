@@ -9,8 +9,7 @@ public class Main {
     	Customer c = new Customer(db);
     	
     	StudentSavings s = new StudentSavings("student", 1000, db);
-    	
-    	
+
     	c.showPersonDetails(db);
     	
     }
