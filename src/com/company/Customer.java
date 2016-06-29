@@ -30,7 +30,7 @@ public class Customer {
 		System.out.println("insert your gender!");
 		inputs =  (String) inputScanner.next();
 		this.sex = inputs;
-		System.out.println("insert your date of birth! (DD/MM/YYYY)");
+		System.out.println("insert your date of birth! (DD.MM.YYYY)");
 		inputs =  (String) inputScanner.next();
 		this.dob = inputs;
 		System.out.println("insert your PIN! ");
