@@ -16,6 +16,9 @@ public class Account {
 	}
 	
 	/* --- Open/Close Account --- */
+	// -------------------------------------------------
+	// for opening and closing a account
+	// -------------------------------------------------
 	public void openAccount (Account a, Database d) {
 		d.setAccount(a);
 	}
@@ -25,6 +28,9 @@ public class Account {
 	}
 	
 	/* --- Balance --- */
+	// -------------------------------------------------
+	// to show current balance and increase the balance
+	// -------------------------------------------------
 	public void showBalance (int accountId, Database d) {
 		double value = d.getAccount(accountId).balance;
 		
@@ -36,11 +42,14 @@ public class Account {
 	}
 	
 	/* --- Set Limit and Rate --- */
-	public void setInterestRate (double iRate) {
-		this.interestRate = iRate;
+	// -------------------------------------------------
+	// setters for interest rate and credit limit
+	// -------------------------------------------------
+	public void setInterestRate (double interestRate) {
+		this.interestRate = interestRate;
 	}
 	
-	public void setCreditLimit (int cLimit) {
-		this.creditLimit = cLimit;
+	public void setCreditLimit (int creditLimit) {
+		this.creditLimit = creditLimit;
 	}
 }
