@@ -12,6 +12,8 @@ public class Customer {
 	private List<Integer> AccountList;
 	private String pin;
 	private int customerId;
+	
+	private static Scanner inputScanner = new Scanner(System.in);
 
 	
 	public Customer(Database db, String newName, String newAddress, String newPhone, String newSex, String newDob, String newPin)
@@ -30,7 +32,6 @@ public class Customer {
 	}
 	
 	public Customer(Database db) {
-		Scanner inputScanner = new Scanner(System.in);
 		String inputs;
 		boolean[] checklist = new boolean[6];
 		for (int c = 0; c < 6; c++) {
@@ -122,21 +123,22 @@ public class Customer {
 	// -------------------------------------------------
 	// updates personal details by checking each value
 	// -------------------------------------------------
-	public void updatePersonDetails(Database d) {
+	public static void updatePersonDetails(int customerId, Database d) {
 
-		int customerId = this.customerId;
 		
 		Customer oldCustomer = d.getCustomer(customerId);
 		Customer newCustomer = oldCustomer;
 
-		Scanner inputScanner = new Scanner(System.in);
-
 		boolean update = true;
 		boolean[] updatecheck = new boolean[6];
 		for (int c = 0; c < 6; c++) {
+			
 			updatecheck[c] = false;
+			
 		}
+		
 		while (update) {
+			
 			System.out.println("Your current personal details are: " + oldCustomer.name + " , " + oldCustomer.address
 					+ " , " + oldCustomer.phone + " , " + oldCustomer.sex + " , " + oldCustomer.dob);
 			System.out.println(
@@ -225,14 +227,16 @@ public class Customer {
 				}
 			} 
 
-		oldCustomer = newCustomer;
+			oldCustomer = newCustomer;
+			
 		}
+		
 	}
 
-	public void removeCustomer (Database d)
+	public static void removeCustomer (int customerId, Database d)
 	{
 
-		d.removeCustomer(this.customerId);
+		d.removeCustomer(customerId);
 
 	}
 	
