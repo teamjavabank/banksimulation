@@ -77,10 +77,8 @@ public class Main {
 					   		
 					   	case 1:
 					   		
-					   		boolean customerMenuActive = true;
-					   		
 					   		System.out.println("Welcome to the Customer menu.");
-					   		System.out.println("Press a number to select your desired function: Add customer (1), Remove customer (2), Update information (3)");
+					   		System.out.println("Press a number to select your desired function: Add customer (1), Remove customer (2), Update information (3), Show customer details (4)");
 					   		System.out.println("To leave the menu press 0.");
 					   		
 					   		input = inputScanner.nextInt();
@@ -89,7 +87,6 @@ public class Main {
 							   	case 0:
 							   		
 							   		fromMenu = true;
-							   		customerMenuActive = false;
 							   		break;
 							   		
 							   	case 1:
@@ -113,6 +110,14 @@ public class Main {
 							    	Customer.updatePersonDetails(input, db);
 							        
 							        break;
+							    case 4:
+							    	
+							    	System.out.println("Which customer's information do you want to see?");
+							    	input = inputScanner.nextInt();
+							    	
+							    	Customer.showPersonDetails(input, db);
+							    	
+							    	break;
 							    default:
 							        System.out.println("Please select a valid option!");
 							        break;
@@ -121,9 +126,52 @@ public class Main {
 							break;
 					   	case 2:
 					        
+					   		System.out.println("Welcome to the Accounts menu.");
+					   		System.out.println("Press a number to select your desired function: Add account (1), Remove account (2), Get balance (3)");
+					   		System.out.println("To leave the menu press 0.");
+					   		
+					   		input = inputScanner.nextInt();
+					   		
+						   	switch (input) {
+							   	case 0:
+							   		
+							   		fromMenu = true;
+							   		break;
+							   		
+							   	case 1:
+							   		System.out.println("What kind of account to you want to create?");
+							   		new Customer(db);
+							   		
+									break;
+							   	case 2:
+							        
+							   		System.out.println("Which account do you want to remove?");
+							   		input = inputScanner.nextInt();
+							   		
+							   		db.getAccount(input).closeAccount(db);
+							   		
+							        break;
+							    case 3:
+							    	
+							    	System.out.println("Which account's balance do you want to see?");
+							    	input = inputScanner.nextInt();
+							    	
+							    	System.out.println("The balance is " + Account.getBalance(input, db) + ".");
+							        
+							        break;
+							    default:
+							        System.out.println("Please select a valid option!");
+							        break;
+						   	}
+					   		
 					        break;
 					    case 3:
-					        
+					    	
+					    	System.out.println("Please enter the customer's ID.");
+					    	input = inputScanner.nextInt();
+					    	
+					    	new Transaction(input, db);
+					    	
 					        break;
 					    default:
 					        System.out.println("Please select a valid option!");

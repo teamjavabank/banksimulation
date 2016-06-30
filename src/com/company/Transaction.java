@@ -109,7 +109,6 @@ public class Transaction {
                     break;
             }
         }
-        inputScanner.close();
     }
 
     private int selectAccount(int customerId, Database db, boolean isDeposit) {
