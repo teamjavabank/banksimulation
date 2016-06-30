@@ -54,7 +54,9 @@ public class MortgageApplication {
 		m.id = id;
 		m.setStartBalance(amount*0.8);
 		
-		}
+	}
+	
+
 	
 	
 
