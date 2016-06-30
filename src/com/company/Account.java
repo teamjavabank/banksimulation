@@ -3,7 +3,7 @@ package com.company;
 public class Account {
 	
 	
-	private double balance;
+	protected double balance;
 	private int creditLimit;
 	private double interestRate;
 	private String accountType;
