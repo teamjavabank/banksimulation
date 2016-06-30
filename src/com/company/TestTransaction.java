@@ -13,6 +13,8 @@ public class TestTransaction {
 		Customer c = new Customer(database);
 		StudentSavings s = new StudentSavings("student", 1000, database);
 
-		new Transaction(1000, database);
+		new Transaction(1000, 1001, 150, database);
+		new Transaction(0, 1000, 150, database);
+		new Transaction(1001, 0, 150, database);
 	}
 }

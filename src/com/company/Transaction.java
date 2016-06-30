@@ -3,6 +3,8 @@ package com.company;
 import java.util.*;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
+import static com.company.Account.addMoney;
+import static com.company.Account.subtractMoney;
 
 public class Transaction {
 
@@ -46,47 +48,56 @@ public class Transaction {
         while (!inputScanner.hasNextInt()) inputScanner.next();
         input = inputScanner.nextInt();
 
-        switch (input) {
-            case 1:
-                //transfer
-                this.sender = selectAccount(customerId, d, false);
-                if (sender == 0) break;
-                this.receiver = inputReceiver(this.sender, d);
-                if (receiver == 0) break;
-                this.amount = inputAmount(this.sender, d, false);
-                if (amount == 0) break;
-                this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+        selectOption: while (true) {
+            switch (input) {
+                case 0:
+                    System.out.println("Transaction stopped, returning to last menu.");
+                    break selectOption;
+                case 1:
+                    //transfer
+                    this.sender = selectAccount(customerId, d, false);
+                    if (sender == 0) break;
+                    this.receiver = inputReceiver(this.sender, d);
+                    if (receiver == 0) break;
+                    this.amount = inputAmount(this.sender, d, false);
+                    if (amount == 0) break;
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-                //Make transaction
-                d.setTransaction(this);
-                break;
-            case 2:
-                //deposit
-                this.receiver = selectAccount(customerId, d, true);
-                if (receiver == 0) break;
-                this.amount = inputAmount(this.receiver, d, true);
-                if (amount == 0) break;
-                this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    //Make transaction
+                    d.setTransaction(this);
+                    subtractMoney(this.amount, this.sender, d);
+                    addMoney(this.amount, this.receiver, d);
+                    break selectOption;
+                case 2:
+                    //deposit
+                    this.receiver = selectAccount(customerId, d, true);
+                    if (receiver == 0) break;
+                    this.amount = inputAmount(this.receiver, d, true);
+                    if (amount == 0) break;
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-                //Make transaction
-                d.setTransaction(this);
-                break;
-            case 3:
-                //withdraw
-                this.sender = selectAccount(customerId, d, false);
-                if (sender == 0) break;
-                this.amount = inputAmount(this.sender, d, false);
-                if (amount == 0) break;
-                this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    //Make transaction
+                    d.setTransaction(this);
+                    addMoney(this.amount, this.receiver, d);
+                    break selectOption;
+                case 3:
+                    //withdraw
+                    this.sender = selectAccount(customerId, d, false);
+                    if (sender == 0) break;
+                    this.amount = inputAmount(this.sender, d, false);
+                    if (amount == 0) break;
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-                //Make transaction
-                d.setTransaction(this);
-                break;
-            default:
-                System.out.println("Please select a valid option!");
-                break;
+                    //Make transaction
+                    d.setTransaction(this);
+                    subtractMoney(this.amount, this.sender, d);
+                    break selectOption;
+                default:
+                    System.out.println("Please select a valid option!");
+                    break;
+            }
+            inputScanner.close();
         }
-        inputScanner.close();
     }
 
     private int selectAccount(int customerId, Database d, boolean isDeposit) {

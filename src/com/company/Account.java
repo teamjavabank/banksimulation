@@ -39,11 +39,11 @@ public class Account {
 		return value;
 	}
 	
-	public void addMoney (double value, int accountId, Database d) {
+	public static void addMoney (double value, int accountId, Database d) {
 		d.getAccount(accountId).balance += value;
 	}
 	
-	public void subtractMoney (double value, int accountId, Database d) {
+	public static void subtractMoney (double value, int accountId, Database d) {
 		d.getAccount(accountId).balance -= value;
 	}
 	
