@@ -49,7 +49,7 @@ public class MortgageApplication {
 	private void mortgageConditions(){
 		
 		
-		System.out.println("The Customer gets" + amount*0.8 + "€ and can pay back the mortgage for " + (amount*1.013*1.0735*0.8) + "€");
+		System.out.println("The Customer gets " + amount*0.8 + "€ and can pay back the mortgage for " + (amount*1.013*1.0735*0.8) + "€");
 		System.out.println(" ");
 		System.out.println("The Customer can get a mortgage of " + amount*0.8 +" € with a yearly interest of 3.8 percent for the first two years and an interest of 5 percent afterwards");
 		System.out.println(" Option 1: The yearly rate for paying in 2 Years is:" + (amount*0.8*0.5*1.038* 1.038)+ "€");

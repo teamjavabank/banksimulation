@@ -213,6 +213,8 @@ public class Main {
 							   		
 							   		Account acc = db.getAccount(input);
 							   		
+							   		System.out.println(acc.getAccType());
+							   		
 							   		if (acc.getAccType().equals("mortgage"))
 							   		{
 							   			
@@ -220,25 +222,26 @@ public class Main {
 							   			
 							   			double diff = balance - Account.getBalance(input, db);
 							   			
-							   			System.out.println("To close your Mortgage you need to pay an additional " + diff + " EUR.");
-							   			System.out.println("Press (1) to pay, press (2) if you are not able to.");
+							   			System.out.println("To close the Mortgage account the customer needs to pay an additional " + diff + " EUR.");
+							   			System.out.println("Press (1) to pay, press (2) if the customer is not able to.");
 							   			
 							   			input = inputScanner.nextInt();
 							   			
 							   			if (input == 1)
 							   			{
 							   				
-							   				System.out.println("Your mortgage account was closed.");
+							   				System.out.println("The mortgage account was closed.");
 							   				acc.closeAccount(db);
 							   				
 							   			} else if (input == 2){
 							   				
-							   				System.out.println("Since you are not able to pay back, the mortgage will remain.");
+							   				System.out.println("Since the customer is not able to pay back, the mortgage will remain.");
 							   				
 							   			}
 							   			
 							   		} else {
 							   			
+							   			System.out.println("The account was closed.");
 							   			acc.closeAccount(db);
 							   			
 							   		}
