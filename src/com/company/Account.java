@@ -67,5 +67,13 @@ public class Account {
 		return acc.creditLimit;
 		
 	}
+	
+	public String getAccType ()
+	{
+		
+		return this.accountType;
+		
+	}
+	
 }
 
