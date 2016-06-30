@@ -43,6 +43,10 @@ public class Account {
 		d.getAccount(accountId).balance += value;
 	}
 	
+	public void subtractMoney (double value, int accountId, Database d) {
+		d.getAccount(accountId).balance -= value;
+	}
+	
 	/* --- Set Limit and Rate --- */
 	// -------------------------------------------------
 	// setters for interest rate and credit limit
