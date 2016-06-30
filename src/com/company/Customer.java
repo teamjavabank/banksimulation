@@ -107,76 +107,111 @@ public class Customer {
 	// -------------------------------------------------
 	// updates personal details by checking each value
 	// -------------------------------------------------
-	public static void updatePersonDetails (int customerId, Database d)
-	{
+	public void updatePersonDetails(Database d) {
 
+		int customerId = this.customerId;
+		
 		Customer oldCustomer = d.getCustomer(customerId);
 		Customer newCustomer = oldCustomer;
 
 		Scanner inputScanner = new Scanner(System.in);
 
 		boolean update = true;
-		while(update)
-		{
-			System.out.println("Your current personal details are: " + oldCustomer.name + " , " + oldCustomer.address + " , " + oldCustomer.phone + " , "  + oldCustomer.sex  + " , " + oldCustomer.dob);
-			System.out.println("Press a number to change a value: name (1), address (2), phone(3), sex (4), dob(5), pin(6)");
+		boolean[] updatecheck = new boolean[6];
+		for (int c = 0; c < 6; c++) {
+			updatecheck[c] = false;
+		}
+		while (update) {
+			System.out.println("Your current personal details are: " + oldCustomer.name + " , " + oldCustomer.address
+					+ " , " + oldCustomer.phone + " , " + oldCustomer.sex + " , " + oldCustomer.dob);
+			System.out.println(
+					"Press a number to change a value: name (1), address (2), phone(3), sex (4), dob(5), pin(6)");
 			System.out.println("To exit the updating sesson press 0.");
 			String input = inputScanner.next();
-			String newvalue;
+			String newvalue = "";
 
-			if (input.equals("0")){
+			if (input.equals("0")) {
 				update = false;
 				System.out.println("Updating stopped, changes are saved.");
-			}
-			else if (input.equals("1")){
+			} else if (input.equals("1")) {
 				System.out.println("insert new value!");
 				newvalue = (String) inputScanner.next();
 				newCustomer.name = newvalue;
-			}
-			else if (input.equals("2")){
+			} else if (input.equals("1")) {
 				System.out.println("insert new value!");
-				newvalue =  (String) inputScanner.next();
-				newCustomer.address = newvalue;
-			}
-			else if (input.equals("3")){
+				while (updatecheck[1] == false) {
+					newvalue = (String) inputScanner.next();
+					if (newvalue.length() >= 3 && newvalue.length() < 25) {
+						newCustomer.name = newvalue;
+						updatecheck[0] = true;
+					} else {
+						System.out.println("please enter a name between 3 and 25 charakters");
+					}
+				}
+			} else if (input.equals("2")) {
+				System.out.println("insert new value!!");
+				while (updatecheck[1] == false) {
+					newvalue = (String) inputScanner.next();
+					if (newvalue.length() >= 5 && newvalue.length() < 40) {
+						newCustomer.address = newvalue;
+						updatecheck[1] = true;
+					} else {
+						System.out.println("please enter a name between 5 and 40 charakters");
+					}
+				}
+			} else if (input.equals("3")) {
+				System.out.println("insert new value!!");
+				while (updatecheck[2] == false) {
+					newvalue = (String) inputScanner.next();
+					if (newvalue.length() >= 9 && newvalue.length() < 20) {
+						newCustomer.phone = newvalue;
+						updatecheck[2] = true;
+					} else {
+						System.out.println("please enter a name between 9 and 20 charakters");
+					}
+				}
+			} else if (input.equals("4")) {
 				System.out.println("insert new value!");
-				newvalue =  (String) inputScanner.next();
-				newCustomer.phone = newvalue;
-			}
-			else if (input.equals("4")){
+				while (updatecheck[3] == false) {
+					newvalue = (String) inputScanner.next();
+					if (newvalue.equals("male") || newvalue.equals("female")) {
+						newCustomer.sex = newvalue;
+						updatecheck[3] = true;
+					} else {
+						System.out.println("please write if you are a ``male`` or a ``female``");
+					}
+				}
+			} else if (input.equals("5")) {
 				System.out.println("insert new value!");
-				newvalue =  (String) inputScanner.next();
-				newCustomer.sex = newvalue;
-			}
-			else if (input.equals("5")){
-				System.out.println("insert new value!");
-				newvalue =  (String) inputScanner.next();
+				newvalue = (String) inputScanner.next();
 				newCustomer.dob = newvalue;
-			}
-			else if (input.equals("6")){
+			} else if (input.equals("6")) {
 				System.out.println("insert new pin!");
-				newvalue =  (String) inputScanner.next();
+				while (updatecheck[5] == false) {
+					newvalue = (String) inputScanner.next();
+					if (newvalue.length() >= 0 && newvalue.length() < 5) {
+						updatecheck[5] = true;
+					} else {
+						System.out.println("please enter a number between 0 and 5 ");
+					}
+				}
 				System.out.println("repeat new pin!");
-				String newvalue2 =  (String) inputScanner.next();
-				if(newvalue.equals(newvalue2)){
+				String newvalue2 = (String) inputScanner.next();				
+				if (newvalue.equals(newvalue2)) {
 					System.out.println("insert old pin!");
-					newvalue =  (String) inputScanner.next();
-					if((oldCustomer.pin).equals(newvalue)){
+					newvalue = (String) inputScanner.next();
+					if ((oldCustomer.pin).equals(newvalue)) {
 						newCustomer.pin = newvalue2;
-					}else{
+					} else {
 						System.out.println("Old PIN was not correct!");
 					}
-				}else{
+				} else {
 					System.out.println("The PINs did not match!");
 				}
-			}
-			else {
-				System.out.println("please enter a number between 0 and 5 ");
-			}
-		}
+			} 
 
 		oldCustomer = newCustomer;
-		
+		}
 	}
 
 	public void removeCustomer (Database d)
