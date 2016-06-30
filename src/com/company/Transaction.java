@@ -227,7 +227,7 @@ public class Transaction {
                 continue;
             } else  {
                 amount = input;
-                System.out.printf("Amount to transfer: %5.2f.\n", amount);
+                System.out.printf("Amount to transfer: %5.2f EUR.\n", amount);
                 customerAccountBalance = Account.getBalance(customerAccount, db);
                 System.out.printf("The new balance of the account %d is: %5.2f\n", customerAccount, customerAccountBalance);
                 break;
@@ -256,7 +256,7 @@ public class Transaction {
             System.out.printf("Transaction: %d\t", transactionKey);
             System.out.printf("Sender: %d\t", sender);
             System.out.printf("Receiver: %d\t", receiver);
-            System.out.printf("Amount: %5.2f\t", amount);
+            System.out.printf("Amount: %5.2f EUR\t", amount);
             System.out.printf("Timestamp: %s\n", timestamp);
         }
 	}
