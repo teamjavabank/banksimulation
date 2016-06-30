@@ -244,17 +244,17 @@ public class Main {
     		
     	} else if (id.equals("2000") && PIN.equals("1101")) {
     		
-    		System.out.println("You have logged in as the manager.");
-    		System.out.println("Press (1) to access the transaction logs.");
-            System.out.println("To leave the menu press 0.");
-            
-            while (!inputScanner.hasNextInt()) inputScanner.next();
-		   	int input = inputScanner.nextInt();
 		
 		   	boolean menuActive = true;
 		   	
 		   	while(menuActive)
 		   	{
+		   		System.out.println("You have logged in as the manager.");
+	    		System.out.println("Press (1) to access the transaction logs.");
+	            System.out.println("To leave the menu press 0.");
+		   		
+	            int input = inputScanner.nextInt();
+	            
 			   	switch (input) {
 			   	case 0:
 			   		
@@ -264,8 +264,7 @@ public class Main {
 			   		
 			   	case 1:
 			   		
-			   		// transaction log
-			   		
+			   		Transaction.showTransactionLog(db);
 			   		
 					break;
 			   	
