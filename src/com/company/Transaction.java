@@ -86,7 +86,7 @@ public class Transaction {
                     if (receiver == 0) break;
                     this.amount = inputAmount(this.receiver, db, true);
                     if (amount == 0) break;
-                    this.timestamp = new SimpleDateFormat("yyyy.MM.ddb.HH.mm.ss").format(new Date());
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
                     //Make transaction
                     db.setTransaction(this);
@@ -98,7 +98,7 @@ public class Transaction {
                     if (sender == 0) break;
                     this.amount = inputAmount(this.sender, db, false);
                     if (amount == 0) break;
-                    this.timestamp = new SimpleDateFormat("yyyy.MM.ddb.HH.mm.ss").format(new Date());
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
                     //Make transaction
                     db.setTransaction(this);
