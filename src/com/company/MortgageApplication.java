@@ -60,16 +60,18 @@ public class MortgageApplication {
 		String inputs;
 		inputs = "5";
 		
-		while(!inputs.equals("0")){
+		while(!(inputs.equals("0"))){
 			System.out.println("Which Option would the customer like? (1/2/3) (0 to leave)");
-			inputs = inputScanner.next();
-			if(inputs == "1"){
+			inputs = (String) inputScanner.next();
+			if(inputs.equals("1")){
 				yearlyPay = amount*0.8*0.5*1.038* 1.038;
 				inputs = "0";
-			}else if(inputs =="2"){
+			}else if(inputs.equals("2")){
 				yearlyPay = amount*0.8*0.2*1.038* 1.038*1.05*1.05*1.05;
 				inputs = "0";
-			}else if(inputs =="3"){
+			}else if(inputs.equals("0")){
+				inputs = "0";
+			}else if(inputs.equals("3")){
 				yearlyPay = amount*0.8*0.1*1.038* 1.038*1.05*1.05*1.05*1.05*1.05*1.05*1.05*1.05;
 				inputs = "0";
 			}else{
