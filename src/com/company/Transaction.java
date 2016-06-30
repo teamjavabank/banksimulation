@@ -1,7 +1,6 @@
 package com.company;
 
 import java.util.*;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import static com.company.Account.addMoney;
 import static com.company.Account.subtractMoney;
@@ -96,8 +95,8 @@ public class Transaction {
                     System.out.println("Please select a valid option!");
                     break;
             }
-            inputScanner.close();
         }
+        inputScanner.close();
     }
 
     private int selectAccount(int customerId, Database d, boolean isDeposit) {
@@ -109,9 +108,9 @@ public class Transaction {
         while (true) {
             //Is the transaction a deposit?
             if (isDeposit) {
-                System.out.println("On which one of your accounts do you want to deposit?");
+                System.out.println("On which one of the customers accounts do you want to deposit?");
             } else {
-                System.out.println("Which one of your accounts do you want to use?");
+                System.out.println("Which one of the customers accounts do you want to use?");
             }
 
             //Get user account list
@@ -157,7 +156,7 @@ public class Transaction {
         Map<Integer, Account> AccountList = d.getAccountList();
 
         while (true) {
-            System.out.println("To which account do you want to transfer?");
+            System.out.println("To which account does the customer want to transfer?");
             System.out.println("Press (0) to abort the transaction.");
 
             //Make sure input is an int
@@ -194,9 +193,9 @@ public class Transaction {
 
         while (true) {
             if (!isDeposit) {
-                System.out.printf("Current balance of account %d: %f?\n", customerAccount, customerAccountBalance);
+                System.out.printf("Current balance of account %d: %5.2f?\n", customerAccount, customerAccountBalance);
             }
-            System.out.println("Which amount do you want to transfer?");
+            System.out.println("Which amount should be transferred?");
             System.out.println("Press (0) to abort the transaction.");
 
             //Make sure input is a double
@@ -211,13 +210,13 @@ public class Transaction {
                 System.out.println("Amount must be a positive number!");
                 continue;
             } else if(!isDeposit && (UserCreditLimit + customerAccountBalance - input < 0)) {
-                System.out.printf("With this transaction you would exceed your credit limit of %d!\n", UserCreditLimit);
+                System.out.printf("With this transaction you would exceed the customers credit limit of %d!\n", UserCreditLimit);
                 continue;
             } else  {
                 amount = input;
-                System.out.printf("Amount to transfer: %f.\n", amount);
+                System.out.printf("Amount to transfer: %5.2f.\n", amount);
                 customerAccountBalance = Account.getBalance(customerAccount, d);
-                System.out.printf("The new balance of the account %d is: %f\n", customerAccount, customerAccountBalance);
+                System.out.printf("The new balance of the account %d is: %5.2f\n", customerAccount, customerAccountBalance);
                 break;
             }
         }
@@ -226,11 +225,27 @@ public class Transaction {
         return amount;
     }
 
-	public static void showTransactionLog (int customerId, Database d)
-	{
+	public static void showTransactionLog (int customerId, Database d) {
+        Map<Integer, Transaction> transactionList = d.getTransactionLog();
+        for (Map.Entry<Integer, Transaction> entry : transactionList.entrySet())
+        {
+            //Get transaction key and value
+            int transactionKey = entry.getKey();
+            Transaction transaction = entry.getValue();
 
+            //Get transaction object values
+            int sender = transaction.sender;
+            int receiver = transaction.receiver;
+            double amount = transaction.amount;
+            String timestamp = transaction.timestamp;
 
-
+            //Print transaction details
+            System.out.printf("Transaction: %d\t", transactionKey);
+            System.out.printf("Sender: %d\t", sender);
+            System.out.printf("Receiver: %d\t", receiver);
+            System.out.printf("Amount: %5.2f\t", amount);
+            System.out.printf("Timestamp: %s\n", timestamp);
+        }
 	}
 
 }
