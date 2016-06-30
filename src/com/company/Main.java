@@ -86,7 +86,6 @@ public class Main {
 						   	switch (input) {
 							   	case 0:
 							   		
-							   		fromMenu = true;
 							   		break;
 							   		
 							   	case 1:
@@ -135,12 +134,76 @@ public class Main {
 						   	switch (input) {
 							   	case 0:
 							   		
-							   		fromMenu = true;
 							   		break;
 							   		
 							   	case 1:
 							   		System.out.println("What kind of account to you want to create?");
-							   		new Customer(db);
+							   		System.out.println("Press a number to select your desired function: Current (1), Junior Current (2), Student Savings (3), Corporate Savings (4), Mortgage (5)");
+							   		System.out.println("To leave the menu press 0.");
+							   		
+							   		input = inputScanner.nextInt();
+							   		
+								   	switch (input) {
+									   	case 0:
+									   		
+									   		fromMenu = true;
+									   		break;
+									   		
+									   	case 1:
+									   		
+									   		System.out.println("Who will be the new account's owner?");
+									   		input = inputScanner.nextInt();
+									   		
+									   		new Current("current", input, db);
+									   		
+											break;
+											
+									   	case 2:
+									        
+									   		System.out.println("Please enter the owner's ID.");
+									   		input = inputScanner.nextInt();
+									   		int owner = input;
+									   		
+									   		System.out.println("Please enter the guardian's ID.");
+									   		input = inputScanner.nextInt();
+									   		int guardian = input;
+									   		
+									   		new JuniorCurrent("junior", owner, guardian, db);
+									   		
+											break;
+											
+									    case 3:
+									    	
+									    	System.out.println("Who will be the new account's owner?");
+									   		input = inputScanner.nextInt();
+									   		
+									   		new StudentSavings("student", input, db);
+									   		
+											break;
+
+									    case 4:
+									    	
+									    	System.out.println("Who will be the new account's owner?");
+									   		input = inputScanner.nextInt();
+									   		
+									   		new CorporateSavings("corporate", input, db);
+									   		
+											break;
+
+									    case 5:
+										
+									    	System.out.println("Who will be the new account's owner?");
+									   		input = inputScanner.nextInt();
+									   		
+									   		new MortgageApplication("mortgage", input, db);
+									   		
+											break;
+									    	
+									    	
+									    default:
+									        System.out.println("Please select a valid option!");
+									        break;
+								   	}
 							   		
 									break;
 							   	case 2:
