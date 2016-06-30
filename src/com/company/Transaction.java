@@ -15,7 +15,7 @@ public class Transaction {
     private static Scanner inputScanner = new Scanner(System.in);
 
     //Computed values constructor
-    public Transaction (int newsender, int newreceiver, double newamount, Database d) {
+    public Transaction (int newsender, int newreceiver, double newamount, Database db) {
 
         //Initialize variables
         this.sender = newsender;
@@ -24,10 +24,23 @@ public class Transaction {
         this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
         //Make Transaction
-        d.setTransaction(this);
+        db.setTransaction(this);
+
+
+        if(this.sender != 0 && this.receiver != 0) {
+            //transfer
+            subtractMoney(this.amount, this.sender, db);
+            addMoney(this.amount, this.receiver, db);
+        } else if (this.receiver != 0){
+            //deposit
+            addMoney(this.amount, this.receiver, db);
+        } else {
+            //withdraw
+            subtractMoney(this.amount, this.sender, db);
+        }
     }
     //User input constructor
-	public Transaction (int customerId, Database d  ) {
+	public Transaction (int customerId, Database db) {
 
         //Initialize variables
         this.sender = 0;
@@ -54,42 +67,42 @@ public class Transaction {
                     break selectOption;
                 case 1:
                     //transfer
-                    this.sender = selectAccount(customerId, d, false);
+                    this.sender = selectAccount(customerId, db, false);
                     if (sender == 0) break;
-                    this.receiver = inputReceiver(this.sender, d);
+                    this.receiver = inputReceiver(this.sender, db);
                     if (receiver == 0) break;
-                    this.amount = inputAmount(this.sender, d, false);
+                    this.amount = inputAmount(this.sender, db, false);
                     if (amount == 0) break;
                     this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
                     //Make transaction
-                    d.setTransaction(this);
-                    subtractMoney(this.amount, this.sender, d);
-                    addMoney(this.amount, this.receiver, d);
+                    db.setTransaction(this);
+                    subtractMoney(this.amount, this.sender, db);
+                    addMoney(this.amount, this.receiver, db);
                     break selectOption;
                 case 2:
                     //deposit
-                    this.receiver = selectAccount(customerId, d, true);
+                    this.receiver = selectAccount(customerId, db, true);
                     if (receiver == 0) break;
-                    this.amount = inputAmount(this.receiver, d, true);
+                    this.amount = inputAmount(this.receiver, db, true);
                     if (amount == 0) break;
-                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.ddb.HH.mm.ss").format(new Date());
 
                     //Make transaction
-                    d.setTransaction(this);
-                    addMoney(this.amount, this.receiver, d);
+                    db.setTransaction(this);
+                    addMoney(this.amount, this.receiver, db);
                     break selectOption;
                 case 3:
                     //withdraw
-                    this.sender = selectAccount(customerId, d, false);
+                    this.sender = selectAccount(customerId, db, false);
                     if (sender == 0) break;
-                    this.amount = inputAmount(this.sender, d, false);
+                    this.amount = inputAmount(this.sender, db, false);
                     if (amount == 0) break;
-                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.ddb.HH.mm.ss").format(new Date());
 
                     //Make transaction
-                    d.setTransaction(this);
-                    subtractMoney(this.amount, this.sender, d);
+                    db.setTransaction(this);
+                    subtractMoney(this.amount, this.sender, db);
                     break selectOption;
                 default:
                     System.out.println("Please select a valid option!");
@@ -99,7 +112,7 @@ public class Transaction {
         inputScanner.close();
     }
 
-    private int selectAccount(int customerId, Database d, boolean isDeposit) {
+    private int selectAccount(int customerId, Database db, boolean isDeposit) {
         //Define variables
         int input;
         int customerAccount;
@@ -114,7 +127,7 @@ public class Transaction {
             }
 
             //Get user account list
-            List<Integer> customerAccountList = Customer.getAccounts(customerId, d);
+            List<Integer> customerAccountList = Customer.getAccounts(customerId, db);
             for (int i = 1; i <= customerAccountList.size(); i++) {
                 System.out.printf("Account (%d): %s\n", i, customerAccountList.get(i - 1));
             }
@@ -148,12 +161,12 @@ public class Transaction {
         return customerAccount;
     }
 
-    private int inputReceiver(int customerAccount, Database d) {
+    private int inputReceiver(int customerAccount, Database db) {
         //Define input
         int input;
 
         //Let the user type in a receiver account
-        Map<Integer, Account> AccountList = d.getAccountList();
+        Map<Integer, Account> AccountList = db.getAccountList();
 
         while (true) {
             System.out.println("To which account does the customer want to transfer?");
@@ -172,7 +185,7 @@ public class Transaction {
                 continue;
             } else if (AccountList.containsKey(input)) {
                 receiver = input;
-                System.out.printf("Selected receiver account %d.\n", receiver);
+                System.out.printf("Selected receiver account %db.\n", receiver);
                 break;
             } else {
                 System.out.println("Please input a valid account!");
@@ -183,13 +196,13 @@ public class Transaction {
         return receiver;
     }
 
-    private double inputAmount(int customerAccount, Database d, boolean isDeposit) {
+    private double inputAmount(int customerAccount, Database db, boolean isDeposit) {
         //Define input
         double input;
 
         //Let the user select an amount to transfer
-        double customerAccountBalance = Account.getBalance(customerAccount, d);
-        int UserCreditLimit = Account.getCreditLimit(customerAccount, d);
+        double customerAccountBalance = Account.getBalance(customerAccount, db);
+        int UserCreditLimit = Account.getCreditLimit(customerAccount, db);
 
         while (true) {
             if (!isDeposit) {
@@ -215,7 +228,7 @@ public class Transaction {
             } else  {
                 amount = input;
                 System.out.printf("Amount to transfer: %5.2f.\n", amount);
-                customerAccountBalance = Account.getBalance(customerAccount, d);
+                customerAccountBalance = Account.getBalance(customerAccount, db);
                 System.out.printf("The new balance of the account %d is: %5.2f\n", customerAccount, customerAccountBalance);
                 break;
             }
@@ -225,8 +238,8 @@ public class Transaction {
         return amount;
     }
 
-	public static void showTransactionLog (int customerId, Database d) {
-        Map<Integer, Transaction> transactionList = d.getTransactionLog();
+	public static void showTransactionLog (Database db) {
+        Map<Integer, Transaction> transactionList = db.getTransactionLog();
         for (Map.Entry<Integer, Transaction> entry : transactionList.entrySet())
         {
             //Get transaction key and value
