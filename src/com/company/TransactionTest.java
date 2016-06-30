@@ -6,7 +6,7 @@ import java.util.Scanner;
 import static com.company.Account.getBalance;
 import static com.company.Customer.showPersonDetails;
 
-public class Test {
+public class TransactionTest {
 
 	public static void main(String[] args) {
 
