@@ -22,7 +22,7 @@ public class Customer {
 			checklist[c] = false;
 		}
 		while (checklist[0] == false) {
-			System.out.println("insert your name!");
+			System.out.println("insert costumer name!");
 			inputs = (String) inputScanner.next();
 			if (inputs.length() >= 3 && inputs.length() < 25) {
 				this.name = inputs;
@@ -33,7 +33,7 @@ public class Customer {
 		}
 
 		while (checklist[1] == false) {
-			System.out.println("insert your address!");
+			System.out.println("insert costumer address!");
 			inputs = (String) inputScanner.next();
 			if (inputs.length() >= 5 && inputs.length() < 40) {
 				this.address = inputs;
@@ -43,7 +43,7 @@ public class Customer {
 			}
 		}
 		while (checklist[2] == false) {
-			System.out.println("insert your phone number!");
+			System.out.println("insert costumer phone number!");
 			inputs = (String) inputScanner.next();
 			if (inputs.length() >= 9 && inputs.length() < 21) {
 				this.phone = inputs;
@@ -53,28 +53,28 @@ public class Customer {
 			}
 		}
 		while (checklist[3] == false) {
-			System.out.println("insert your gender!");
+			System.out.println("insert costumer gender!");
 			inputs = (String) inputScanner.next();
 			if (inputs.equals("male") || inputs.equals("female")) {
 				this.sex = inputs;
 				checklist[3] = true;
 			} else {
-				System.out.println("please write if you are a ``male`` or a ``female``");
+				System.out.println("please write if the costumer is a ``male`` or a ``female``");
 			}
 		}
 
-		System.out.println("insert your date of birth! (DD/MM/YYYY)");
+		System.out.println("insert the costumers date of birth! (DD/MM/YYYY)");
 		inputs = (String) inputScanner.next();
 		this.dob = inputs;
 
 		while (checklist[5] == false) {
-			System.out.println("insert your PIN!");
+			System.out.println("insert a PIN!");
 			inputs = (String) inputScanner.next();
 			if (inputs.length() >= 4) {
 				this.pin = inputs;
 				checklist[5] = true;
 			} else {
-				System.out.println("your PIN has to be at least 4 characters long");
+				System.out.println("the PIN has to be at least 4 characters long");
 			}
 		}
 		
@@ -178,7 +178,7 @@ public class Customer {
 						newCustomer.sex = newvalue;
 						updatecheck[3] = true;
 					} else {
-						System.out.println("please write if you are a ``male`` or a ``female``");
+						System.out.println("please write if the costumer is a ``male`` or a ``female``");
 					}
 				}
 			} else if (input.equals("5")) {
