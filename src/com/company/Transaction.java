@@ -237,24 +237,27 @@ public class Transaction {
 
 	public static void showTransactionLog (Database db) {
         Map<Integer, Transaction> transactionList = db.getTransactionLog();
-        for (Map.Entry<Integer, Transaction> entry : transactionList.entrySet())
-        {
-            //Get transaction key and value
-            int transactionKey = entry.getKey();
-            Transaction transaction = entry.getValue();
+        if(transactionList.size()==0) {
+            System.out.println("No transactions.");
+        } else {
+            for (Map.Entry<Integer, Transaction> entry : transactionList.entrySet()) {
+                //Get transaction key and value
+                int transactionKey = entry.getKey();
+                Transaction transaction = entry.getValue();
 
-            //Get transaction object values
-            int sender = transaction.sender;
-            int receiver = transaction.receiver;
-            double amount = transaction.amount;
-            String timestamp = transaction.timestamp;
+                //Get transaction object values
+                int sender = transaction.sender;
+                int receiver = transaction.receiver;
+                double amount = transaction.amount;
+                String timestamp = transaction.timestamp;
 
-            //Print transaction details
-            System.out.printf("Transaction: %d\t", transactionKey);
-            System.out.printf("Sender: %d\t", sender);
-            System.out.printf("Receiver: %d\t", receiver);
-            System.out.printf("Amount: %5.2f EUR\t", amount);
-            System.out.printf("Timestamp: %s\n", timestamp);
+                //Print transaction details
+                System.out.printf("Transaction: %d\t", transactionKey);
+                System.out.printf("Sender: %d\t", sender);
+                System.out.printf("Receiver: %d\t", receiver);
+                System.out.printf("Amount: %5.2f EUR\t", amount);
+                System.out.printf("Timestamp: %s\n", timestamp);
+            }
         }
 	}
 
