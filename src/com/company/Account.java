@@ -27,8 +27,8 @@ public class Account {
 	// for closing a account
 	// -------------------------------------------------
 	
-	public static void closeAccount (int accountId, Database d) {
-		d.removeAccount(accountId);
+	public void closeAccount (Database d) {
+		d.removeAccount(this.accountId);
 	}
 	
 	/* --- Balance --- */
