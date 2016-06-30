@@ -8,18 +8,16 @@ public class Account {
 	private double interestRate;
 	private String accountType;
 	private int customerId;
-	private int accountId;
 	
 	public Account (String newAccountType, int newCustomerId, Database db) {
 		this.accountType = newAccountType;
 		this.customerId = newCustomerId;
 		this.balance = 0;
 		
-		this.accountId = db.setAccount(this);
+		int accountId = db.setAccount(this);
 		int customerId = this.customerId;
 		
 		Customer.addAccount(customerId, accountId, db);
-		 
 	}
 	
 	/* --- Close Account --- */
@@ -27,8 +25,8 @@ public class Account {
 	// for closing a account
 	// -------------------------------------------------
 	
-	public void closeAccount (Database d) {
-		d.removeAccount(this.accountId);
+	public void closeAccount (int accountId, Database d) {
+		d.removeAccount(accountId);
 	}
 	
 	/* --- Balance --- */

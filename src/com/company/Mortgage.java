@@ -4,6 +4,7 @@ package com.company;
 public class Mortgage extends Account {
 	public int id;
 	Database db;
+	public double yearlyPay;
 	
 	public Mortgage(String newAccountType, int newCustomerId, Database db1){
 		super(newAccountType, newCustomerId, db1);
@@ -11,6 +12,7 @@ public class Mortgage extends Account {
 		db = db1;
 	}
 	
+	// 1.013 is 1.3 percent interest to open a mortgage
 	public void setStartBalance(double b){
 		subtractMoney(b*1.013, id,db);
 	}
