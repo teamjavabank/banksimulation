@@ -106,10 +106,10 @@ public class Customer {
 	// -------------------------------------------------
 	// prints all personal details
 	// -------------------------------------------------
-	public void showPersonDetails (Database db)
+	public static void showPersonDetails (int customerId, Database db)
 	{
 
-		Customer details = db.getCustomer(this.customerId);
+		Customer details = db.getCustomer(customerId);
 
 		System.out.println(details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
 		for (int account: details.AccountList)
