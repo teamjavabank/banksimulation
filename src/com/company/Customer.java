@@ -14,6 +14,21 @@ public class Customer {
 	private int customerId;
 
 	
+	public Customer(Database db, String newName, String newAddress, String newPhone, String newSex, String newDob, String newPin)
+	{
+		
+		this.name = newName;
+		this.address = newAddress;
+		this.phone = newPhone;
+		this.sex = newSex;
+		this.dob = newDob;
+		this.pin = newPin;
+		this.AccountList = new ArrayList<>();
+		
+		this.customerId = db.setCustomer(this);
+		
+	}
+	
 	public Customer(Database db) {
 		Scanner inputScanner = new Scanner(System.in);
 		String inputs;
