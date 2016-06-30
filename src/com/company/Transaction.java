@@ -13,7 +13,20 @@ public class Transaction {
 
     private static Scanner inputScanner = new Scanner(System.in);
 
-	public Transaction (int customerId, Database d) {
+    //Computed values constructor
+    public Transaction (int newsender, int newreceiver, double newamount, Database d) {
+
+        //Initialize variables
+        this.sender = newsender;
+        this.receiver = newreceiver;
+        this.amount = newamount;
+        this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
+        //Make Transaction
+        d.setTransaction(this);
+    }
+    //User input constructor
+	public Transaction (int customerId, Database d  ) {
 
         //Initialize variables
         this.sender = 0;
@@ -36,31 +49,37 @@ public class Transaction {
         switch (input) {
             case 1:
                 //transfer
-                this.sender = inputSender(customerId, d);
+                this.sender = selectAccount(customerId, d, false);
                 if (sender == 0) break;
-                this.receiver = inputReceiver(customerId, d);
+                this.receiver = inputReceiver(this.sender, d);
                 if (receiver == 0) break;
-                this.amount = inputAmount(customerId, d);
+                this.amount = inputAmount(this.sender, d, false);
                 if (amount == 0) break;
                 this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
+                //Make transaction
                 d.setTransaction(this);
                 break;
             case 2:
                 //deposit
-                this.receiver = inputReceiver(customerId, d);
+                this.receiver = selectAccount(customerId, d, true);
                 if (receiver == 0) break;
-                this.amount = inputAmount(customerId, d);
+                this.amount = inputAmount(this.receiver, d, true);
                 if (amount == 0) break;
                 this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
+                //Make transaction
                 d.setTransaction(this);
                 break;
             case 3:
                 //withdraw
-                this.sender = inputSender(customerId, d);
+                this.sender = selectAccount(customerId, d, false);
                 if (sender == 0) break;
-                this.amount = inputAmount(customerId, d);
+                this.amount = inputAmount(this.sender, d, false);
                 if (amount == 0) break;
                 this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+
+                //Make transaction
                 d.setTransaction(this);
                 break;
             default:
@@ -70,18 +89,26 @@ public class Transaction {
         inputScanner.close();
     }
 
-    private int inputSender(int customerId, Database d) {
-        //Define input
+    private int selectAccount(int customerId, Database d, boolean isDeposit) {
+        //Define variables
         int input;
+        int customerAccount;
 
         //Let the user select a sender account
         while (true) {
-            List<Integer> UserAccountList = Customer.getAccounts(customerId, d);
-            System.out.println("Which one of your accounts do you want to use?");
-
-            for (int i = 1; i <= UserAccountList.size(); i++) {
-                System.out.printf("Account (%d): %s\n", i, UserAccountList.get(i - 1));
+            //Is the transaction a deposit?
+            if (isDeposit) {
+                System.out.println("On which one of your accounts do you want to deposit?");
+            } else {
+                System.out.println("Which one of your accounts do you want to use?");
             }
+
+            //Get user account list
+            List<Integer> customerAccountList = Customer.getAccounts(customerId, d);
+            for (int i = 1; i <= customerAccountList.size(); i++) {
+                System.out.printf("Account (%d): %s\n", i, customerAccountList.get(i - 1));
+            }
+
             System.out.println("Press (0) to abort the transaction.");
 
             //Make sure input is an int
@@ -90,12 +117,16 @@ public class Transaction {
 
             try {
                 if (input == 0) {
-                    sender = 0;
+                    customerAccount = 0;
                     System.out.println("Transaction stopped, returning to last menu.");
                     break;
                 } else {
-                    sender = UserAccountList.get(input - 1);
-                    System.out.printf("Selected sender account %d.\n", sender);
+                    customerAccount = customerAccountList.get(input - 1);
+                    if(isDeposit) {
+                        System.out.printf("Selected receiver account %d.\n", customerAccount);
+                    } else {
+                        System.out.printf("Selected sender account %d.\n", customerAccount);
+                    }
                     break;
                 }
             } catch (IndexOutOfBoundsException e) {
@@ -104,14 +135,14 @@ public class Transaction {
         }
 
         //return the given sender account
-        return sender;
+        return customerAccount;
     }
 
-    private int inputReceiver(int customerId, Database d) {
+    private int inputReceiver(int customerAccount, Database d) {
         //Define input
         int input;
 
-        //Let the user select a receiver account
+        //Let the user type in a receiver account
         Map<Integer, Account> AccountList = d.getAccountList();
 
         while (true) {
@@ -126,9 +157,9 @@ public class Transaction {
                 receiver = 0;
                 System.out.println("Transaction stopped, returning to last menu.");
                 break;
-            /*} else if (input == this.sender) {
+            } else if (input == customerAccount) {
                 System.out.println("A transaction to the same account is not possible.");
-                continue;*/
+                continue;
             } else if (AccountList.containsKey(input)) {
                 receiver = input;
                 System.out.printf("Selected receiver account %d.\n", receiver);
@@ -142,23 +173,17 @@ public class Transaction {
         return receiver;
     }
 
-    private double inputAmount(int customerId, Database d) {
+    private double inputAmount(int customerAccount, Database d, boolean isDeposit) {
         //Define input
         double input;
 
         //Let the user select an amount to transfer
-        boolean isdeposit = true;
-        double UserAccountBalance = 0;
-        int UserCreditLimit = 0;
+        double customerAccountBalance = Account.getBalance(customerAccount, d);
+        int UserCreditLimit = Account.getCreditLimit(customerAccount, d);
 
-        if (sender != 0) {
-            UserAccountBalance = Account.getBalance(sender, d);
-            UserCreditLimit = Account.getCreditLimit(sender, d);
-            isdeposit = false;
-        }
         while (true) {
-            if (!isdeposit) {
-                System.out.printf("Current balance of account %d: %f?\n", sender, UserAccountBalance);
+            if (!isDeposit) {
+                System.out.printf("Current balance of account %d: %f?\n", customerAccount, customerAccountBalance);
             }
             System.out.println("Which amount do you want to transfer?");
             System.out.println("Press (0) to abort the transaction.");
@@ -174,12 +199,14 @@ public class Transaction {
             } else if(input <= 0) {
                 System.out.println("Amount must be a positive number!");
                 continue;
-            } else if(!isdeposit && (UserCreditLimit + UserAccountBalance - input < 0)) {
+            } else if(!isDeposit && (UserCreditLimit + customerAccountBalance - input < 0)) {
                 System.out.printf("With this transaction you would exceed your credit limit of %d!\n", UserCreditLimit);
                 continue;
             } else  {
                 amount = input;
                 System.out.printf("Amount to transfer: %f.\n", amount);
+                customerAccountBalance = Account.getBalance(customerAccount, d);
+                System.out.printf("The new balance of the account %d is: %f\n", customerAccount, customerAccountBalance);
                 break;
             }
         }
