@@ -227,9 +227,7 @@ public class Transaction {
                 continue;
             } else  {
                 amount = input;
-                System.out.printf("Amount to transfer: %5.2f EUR.\n", amount);
-                customerAccountBalance = Account.getBalance(customerAccount, db);
-                System.out.printf("The new balance of the account %d is: %5.2f\n", customerAccount, customerAccountBalance);
+                System.out.printf("Transaction of %5.2f EUR was successful.\n", amount);
                 break;
             }
         }
