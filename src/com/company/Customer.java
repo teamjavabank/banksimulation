@@ -123,7 +123,7 @@ public class Customer {
 				System.out.println("Customer " + details.customerId + ": " + details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
 				if (!details.AccountList.isEmpty()) {
 					for (int account : details.AccountList) {
-						System.out.printf("Account %d: %5.2f EUR.", account, Account.getBalance(account, db));
+						System.out.printf("Account %d: %5.2f EUR.\n", account, Account.getBalance(account, db));
 					}
 				}
 				break;
@@ -254,6 +254,7 @@ public class Customer {
 	{
 
 		d.removeCustomer(customerId);
+		System.out.println("The customer was removed.");
 
 	}
 	// -------------------------------------------------
