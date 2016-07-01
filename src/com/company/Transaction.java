@@ -54,7 +54,7 @@ public class Transaction {
 		//Menu
 		System.out.println("Welcome to the transaction menu!");
 		System.out.println("Press a number to select your desired function: transfer (1), deposit (2), withdraw (3)");
-		System.out.println("to abort the transaction the transaction sesson press 0.");
+		System.out.println("To abort the transaction the transaction sesson press 0.");
 
 		//Make sure input is an int
 		while (!inputScanner.hasNextInt()) inputScanner.next();
