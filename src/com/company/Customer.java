@@ -12,13 +12,13 @@ public class Customer {
 	private List<Integer> AccountList;
 	private String pin;
 	private int customerId;
-	
+
 	private static Scanner inputScanner = new Scanner(System.in);
 
-	
+
 	public Customer(Database db, String newName, String newAddress, String newPhone, String newSex, String newDob, String newPin)
 	{
-		
+
 		this.name = newName;
 		this.address = newAddress;
 		this.phone = newPhone;
@@ -26,11 +26,11 @@ public class Customer {
 		this.dob = newDob;
 		this.pin = newPin;
 		this.AccountList = new ArrayList<>();
-		
+
 		this.customerId = db.setCustomer(this);
-		
+
 	}
-	
+
 	public Customer(Database db) {
 		String inputs;
 		boolean[] checklist = new boolean[6];
@@ -93,16 +93,16 @@ public class Customer {
 				System.out.println("the PIN has to be at least 4 characters long");
 			}
 		}
-		
+
 		this.AccountList = new ArrayList<>();
-		
+
 		this.customerId = db.setCustomer(this);
 
 	}
-	
 
-	
-	
+
+
+
 	// -------------------------------------------------
 	// prints all personal details
 	// -------------------------------------------------
@@ -112,13 +112,13 @@ public class Customer {
 		Customer details = db.getCustomer(customerId);
 
 		System.out.println("Customer " + details.customerId + ": " + details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
-		
+
 		if (!details.AccountList.isEmpty()){
 			for (int account: details.AccountList)
 			{
-	
+
 				System.out.println("Account " + account + ": " + Account.getBalance(account, db) + " EUR");
-	
+
 			}
 		}
 	}
@@ -127,20 +127,20 @@ public class Customer {
 	// -------------------------------------------------
 	public static void updatePersonDetails(int customerId, Database d) {
 
-		
+
 		Customer oldCustomer = d.getCustomer(customerId);
 		Customer newCustomer = oldCustomer;
 
 		boolean update = true;
 		boolean[] updatecheck = new boolean[6];
 		for (int c = 0; c < 6; c++) {
-			
+
 			updatecheck[c] = false;
-			
+
 		}
-		
+
 		while (update) {
-			
+
 			System.out.println("Your current personal details are: " + oldCustomer.name + " , " + oldCustomer.address
 					+ " , " + oldCustomer.phone + " , " + oldCustomer.sex + " , " + oldCustomer.dob);
 			System.out.println(
@@ -230,9 +230,9 @@ public class Customer {
 			} 
 
 			oldCustomer = newCustomer;
-			
+
 		}
-		
+
 	}
 
 	public static void removeCustomer (int customerId, Database d)
@@ -241,41 +241,41 @@ public class Customer {
 		d.removeCustomer(customerId);
 
 	}
-	
+
 	public static List<Integer> getAccounts (int customerId, Database d)
 	{
-		
+
 		Customer c = d.getCustomer(customerId);
-		
+
 		return c.AccountList;
-			
+
 	}
-	
+
 	public static String getDob (int customerId, Database d)
 	{
-		
+
 		Customer c = d.getCustomer(customerId);
-		
+
 		return c.dob;
-		
+
 	}
-	
+
 	public static void addAccount (int customerId, int accountId, Database d)
 	{
-		
+
 		Customer c = d.getCustomer(customerId);
-		
+
 		c.AccountList.add(accountId);
-		
+
 	}
-	
+
 	public static void removeAccount (int customerId, int accountId, Database d)
 	{
-		
+
 		Customer c = d.getCustomer(customerId);
-		
+
 		c.AccountList.remove(accountId - 1000);
-		
+
 	}
-	
+
 }

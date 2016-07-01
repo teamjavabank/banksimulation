@@ -37,7 +37,7 @@ public class TestMortgage {
 		System.out.println("mortageg account created for user 1001.");
 		printBalance(1001, db);
 
-		
+
 		//Create a Mortgage
 		System.out.println("Create a Mortgage.\n");
 		new MortgageApplication("mortgage", 1002, db);

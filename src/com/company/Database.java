@@ -11,7 +11,7 @@ public class Database {
 
 	//Variables for IDs
 	private int cid, aid, tid;
-	
+
 	//Constructor
 	public Database() {
 		cid = 1000;
@@ -37,7 +37,7 @@ public class Database {
 	public Customer removeCustomer (int customerId) {
 		return customerList.remove(customerId);
 	}
-	
+
 	//getCustomerList
 	public Map<Integer, Customer> getCustomerList () {
 		return customerList;
