@@ -28,6 +28,10 @@ public class Account {
 	
 	public void closeAccount (Database d) {
 		d.removeAccount(this.accountId);
+		Customer c = d.getCustomer(this.customerId);
+		
+		Customer.removeAccount(this.customerId, this.accountId, d);
+		
 	}
 	/* --- Balance --- */
 	// -------------------------------------------------

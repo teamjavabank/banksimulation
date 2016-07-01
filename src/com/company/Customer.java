@@ -111,14 +111,16 @@ public class Customer {
 
 		Customer details = db.getCustomer(customerId);
 
-		System.out.println(details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
-		for (int account: details.AccountList)
-		{
-
-			System.out.println("Account: " + account);
-
+		System.out.println("Customer " + details.customerId + ": " + details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
+		
+		if (!details.AccountList.isEmpty()){
+			for (int account: details.AccountList)
+			{
+	
+				System.out.println("Account " + account + ": " + Account.getBalance(account, db) + " EUR");
+	
+			}
 		}
-
 	}
 	// -------------------------------------------------
 	// updates personal details by checking each value
@@ -266,4 +268,14 @@ public class Customer {
 		c.AccountList.add(accountId);
 		
 	}
+	
+	public static void removeAccount (int customerId, int accountId, Database d)
+	{
+		
+		Customer c = d.getCustomer(customerId);
+		
+		c.AccountList.remove(accountId - 1000);
+		
+	}
+	
 }
