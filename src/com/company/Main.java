@@ -21,6 +21,13 @@ public class Main {
 		new Current("current", 1001, db);
 		new CorporateSavings("corporate", 1002, db);
 		new Current("current", 1002, db);
+		
+		new Transaction (0, 1000, 2500, db);
+		new Transaction (0, 1001, 2300, db);
+		new Transaction (0, 1002, 500, db);
+		new Transaction (0, 1003, 200, db);
+		new Transaction (1001, 1003, 500, db);
+		new Transaction (1002, 0, 20, db);
 
 		while (true)
 		{
