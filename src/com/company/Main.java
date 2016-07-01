@@ -222,7 +222,7 @@ public class Main {
 
 							double diff = Math.abs(toPay - Account.getBalance(input, db));
 
-							System.out.println("To close the Mortgage account the customer needs to pay an additional " + diff + " EUR.");
+							System.out.printf("To close the Mortgage account the customer needs to pay an additional %5.2f EUR.\n", diff);
 							System.out.println("Press (1) to pay, press (2) if the customer is not able to.");
 
 							input = inputScanner.nextInt();
@@ -252,7 +252,7 @@ public class Main {
 						System.out.println("Which account's balance do you want to see?");
 						input = inputScanner.nextInt();
 
-						System.out.println("The balance is " + Account.getBalance(input, db) + ".");
+						System.out.printf("The balance is %5.2f EUR.\n", Account.getBalance(input, db));
 
 						break;
 					default:
