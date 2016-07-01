@@ -9,9 +9,7 @@ public class Main {
 	private static Scanner inputScanner = new Scanner(System.in);
 	private static boolean fromMenu = false;
 
-
     public static void main(String[] args) {
-    	
 	
     	Database db = new Database();
     	
@@ -23,8 +21,6 @@ public class Main {
     	new Current("current", 1001, db);
     	new CorporateSavings("corporate", 1002, db);
     	new Current("current", 1002, db);
-    	
-    	
     	
     	while (true)
     	{
@@ -52,10 +48,7 @@ public class Main {
     	
     	if (id.equals("1000") && PIN.equals("1234"))
     	{
-    		
-    		
-			   	
-			
+
 			   	boolean menuActive = true;
 			   	
 			   	while(menuActive)
@@ -199,7 +192,6 @@ public class Main {
 									   		
 											break;
 									    	
-									    	
 									    default:
 									        System.out.println("Please select a valid option!");
 									        break;
@@ -244,8 +236,6 @@ public class Main {
 							   			
 							   		}
 							   		
-							   		
-							   		
 							        break;
 							    case 3:
 							    	
@@ -276,7 +266,6 @@ public class Main {
 			   	}
     		
     	} else if (id.equals("2000") && PIN.equals("1101")) {
-    		
 		
 		   	boolean menuActive = true;
 		   	
@@ -320,12 +309,9 @@ public class Main {
 			        break;
 		   	}
 		}
-    		
-    		
+
     	}
 
-    	
     }
-    
-    
+
 }
