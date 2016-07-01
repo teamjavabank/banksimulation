@@ -19,6 +19,8 @@ public class Account {
 		int customerId = this.customerId;
 
 		Customer.addAccount(customerId, accountId, db);
+
+		System.out.printf("Success! Account with the id %d has been added.\n", this.accountId);
 	}
 
 	/* --- Close Account --- */

@@ -16,18 +16,21 @@ public class Main {
 		new Customer(db, "Tom Smith", "Broadway 203, New York", "023454421992", "male", "12.03.1974", "6343");
 		new Customer(db, "Chris Coleman", "Edge Street 7, London", "0421356356", "male", "05.11.1982", "3367");
 		new Customer(db, "Anne Lain", "North Ave 22, Mumbai", "04677352345", "female", "26.09.1964", "4976");
+		System.out.println("Created computed customers\n");
 
 		new StudentSavings("student", 1000, db);
 		new Current("current", 1001, db);
 		new CorporateSavings("corporate", 1002, db);
 		new Current("current", 1002, db);
-		
+		System.out.println("Created computed accounts\n");
+
 		new Transaction (0, 1000, 2500, db);
 		new Transaction (0, 1001, 2300, db);
 		new Transaction (0, 1002, 500, db);
 		new Transaction (0, 1003, 200, db);
 		new Transaction (1001, 1003, 500, db);
 		new Transaction (1002, 0, 20, db);
+		System.out.println("Created computed transactions\n");
 
 		while (true)
 		{
@@ -60,7 +63,7 @@ public class Main {
 
 			while(menuActive)
 			{
-				System.out.println("You have logged in as cashier " + id + ".");
+				System.out.println("\nYou are logged in as cashier " + id + ".");
 				System.out.println("Welcome to the main menu!");
 				System.out.println("Press a number to select your desired function: Customer actions (1), Account actions (2), Transaction (3)");
 				System.out.println("To leave the menu press 0.");
@@ -77,7 +80,7 @@ public class Main {
 
 				case 1:
 
-					System.out.println("Welcome to the Customer menu.");
+					System.out.println("\nWelcome to the Customer menu.");
 					System.out.println("Press a number to select your desired function: Add customer (1), Remove customer (2), Update information (3), Show customer details (4)");
 					System.out.println("To leave the menu press 0.");
 
@@ -125,7 +128,7 @@ public class Main {
 					break;
 				case 2:
 
-					System.out.println("Welcome to the Accounts menu.");
+					System.out.println("\nWelcome to the Accounts menu.");
 					System.out.println("Press a number to select your desired function: Add account (1), Remove account (2), Get balance (3)");
 					System.out.println("To leave the menu press 0.");
 
@@ -137,7 +140,7 @@ public class Main {
 						break;
 
 					case 1:
-						System.out.println("What kind of account do you want to create?");
+						System.out.println("\nWhat kind of account do you want to create?");
 						System.out.println("Press a number to select your desired function: Current (1), Junior Current (2), Student Savings (3), Corporate Savings (4), Mortgage (5)");
 						System.out.println("To leave the menu press 0.");
 
@@ -278,7 +281,7 @@ public class Main {
 
 			while(menuActive)
 			{
-				System.out.println("You have logged in as the manager.");
+				System.out.println("\nYou are logged in as the manager.");
 				System.out.println("Press (1) to access the transaction logs, press (2) to see all customers and their balances.");
 				System.out.println("To leave the menu press 0.");
 
@@ -317,6 +320,8 @@ public class Main {
 				}
 			}
 
+		} else {
+			System.out.println("\nLogin was not successful, please try again.\n");
 		}
 
 	}

@@ -52,7 +52,7 @@ public class Transaction {
 		int input;
 
 		//Menu
-		System.out.println("Welcome to the transaction menu!");
+		System.out.println("\nWelcome to the transaction menu!");
 		System.out.println("Press a number to select your desired function: transfer (1), deposit (2), withdraw (3)");
 		System.out.println("To abort the transaction the transaction sesson press 0.");
 
@@ -62,51 +62,51 @@ public class Transaction {
 
 		selectOption: while (true) {
 			switch (input) {
-			case 0:
-				System.out.println("Transaction stopped, returning to last menu.");
-				break selectOption;
-			case 1:
-				//transfer
-				this.sender = selectAccount(customerId, db, false);
-				if (sender == 0) break;
-				this.receiver = inputReceiver(this.sender, db);
-				if (receiver == 0) break;
-				this.amount = inputAmount(this.sender, db, false);
-				if (amount == 0) break;
-				this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                case 0:
+                    System.out.println("Transaction stopped, returning to last menu.");
+                    break selectOption;
+                case 1:
+                    //transfer
+                    this.sender = selectAccount(customerId, db, false);
+                    if (this.sender == 0) break selectOption;
+                    this.receiver = inputReceiver(this.sender, db);
+                    if (this.receiver == 0) break selectOption;
+                    this.amount = inputAmount(this.sender, db, false);
+                    if (this.amount == 0) break selectOption;
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-				//Make transaction
-				db.setTransaction(this);
-				subtractMoney(this.amount, this.sender, db);
-				addMoney(this.amount, this.receiver, db);
-				break selectOption;
-			case 2:
-				//deposit
-				this.receiver = selectAccount(customerId, db, true);
-				if (receiver == 0) break;
-				this.amount = inputAmount(this.receiver, db, true);
-				if (amount == 0) break;
-				this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    //Make transaction
+                    db.setTransaction(this);
+                    subtractMoney(this.amount, this.sender, db);
+                    addMoney(this.amount, this.receiver, db);
+                    break selectOption;
+                case 2:
+                    //deposit
+                    this.receiver = selectAccount(customerId, db, true);
+                    if (receiver == 0) break selectOption;
+                    this.amount = inputAmount(this.receiver, db, true);
+                    if (amount == 0) break selectOption;
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-				//Make transaction
-				db.setTransaction(this);
-				addMoney(this.amount, this.receiver, db);
-				break selectOption;
-			case 3:
-				//withdraw
-				this.sender = selectAccount(customerId, db, false);
-				if (sender == 0) break;
-				this.amount = inputAmount(this.sender, db, false);
-				if (amount == 0) break;
-				this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
+                    //Make transaction
+                    db.setTransaction(this);
+                    addMoney(this.amount, this.receiver, db);
+                    break selectOption;
+                case 3:
+                    //withdraw
+                    this.sender = selectAccount(customerId, db, false);
+                    if (sender == 0) break selectOption;
+                    this.amount = inputAmount(this.sender, db, false);
+                    if (amount == 0) break selectOption;
+                    this.timestamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new Date());
 
-				//Make transaction
-				db.setTransaction(this);
-				subtractMoney(this.amount, this.sender, db);
-				break selectOption;
-			default:
-				System.out.println("Please select a valid option!");
-				break;
+                    //Make transaction
+                    db.setTransaction(this);
+                    subtractMoney(this.amount, this.sender, db);
+                    break selectOption;
+                default:
+                    System.out.println("Please select a valid option!");
+                    break;
 			}
 		}
 	}
@@ -120,9 +120,9 @@ public class Transaction {
 		while (true) {
 			//Is the transaction a deposit?
 			if (isDeposit) {
-				System.out.println("On which one of the customers accounts do you want to deposit?");
+				System.out.println("\nOn which one of the customers accounts do you want to deposit?");
 			} else {
-				System.out.println("Which one of the customers accounts do you want to use?");
+				System.out.println("\nWhich one of the customers accounts do you want to use?");
 			}
 
 			//Get user account list
@@ -153,6 +153,7 @@ public class Transaction {
 				}
 			} catch (IndexOutOfBoundsException e) {
 				System.out.println("Please select a valid account!");
+                continue;
 			}
 		}
 
@@ -168,7 +169,7 @@ public class Transaction {
 		Map<Integer, Account> AccountList = db.getAccountList();
 
 		while (true) {
-			System.out.println("To which account does the customer want to transfer?");
+			System.out.println("\nTo which account does the customer want to transfer?");
 			System.out.println("Press (0) to abort the transaction.");
 
 			//Make sure input is an int
@@ -184,7 +185,7 @@ public class Transaction {
 				continue;
 			} else if (AccountList.containsKey(input)) {
 				receiver = input;
-				System.out.printf("Selected receiver account %db.\n", receiver);
+				System.out.printf("Selected receiver account %d.\n", receiver);
 				break;
 			} else {
 				System.out.println("Please input a valid account!");
@@ -205,7 +206,7 @@ public class Transaction {
 
 		while (true) {
 			if (!isDeposit) {
-				System.out.printf("Current balance of account %d: %5.2f?\n", customerAccount, customerAccountBalance);
+				System.out.printf("\nCurrent balance of account %d: %5.2f?\n", customerAccount, customerAccountBalance);
 			}
 			System.out.println("Which amount should be transferred?");
 			System.out.println("Press (0) to abort the transaction.");

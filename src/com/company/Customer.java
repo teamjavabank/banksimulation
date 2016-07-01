@@ -32,6 +32,8 @@ public class Customer {
 
 		this.customerId = db.setCustomer(this);
 
+		System.out.printf("Success! Customer with the id %d has been added.\n", this.customerId);
+
 	}
 	// -------------------------------------------------
 	// add an account, individual specifications for the input values
@@ -44,7 +46,7 @@ public class Customer {
 		}
 		while (checklist[0] == false) {
 			System.out.println("Insert costumer name!");
-			inputs = (String) inputScanner.next();
+			inputs = (String) inputScanner.nextLine();
 			if (inputs.length() >= 3 && inputs.length() < 25) {
 				this.name = inputs;
 				checklist[0] = true;
@@ -55,7 +57,7 @@ public class Customer {
 
 		while (checklist[1] == false) {
 			System.out.println("Insert costumer address!");
-			inputs = (String) inputScanner.next();
+			inputs = (String) inputScanner.nextLine();
 			if (inputs.length() >= 5 && inputs.length() < 40) {
 				this.address = inputs;
 				checklist[1] = true;
@@ -84,7 +86,7 @@ public class Customer {
 			}
 		}
 
-		System.out.println("Insert the costumers date of birth! (DD/MM/YYYY)");
+		System.out.println("Insert the costumers date of birth! (DD.MM.YYYY)");
 		inputs = (String) inputScanner.next();
 		this.dob = inputs;
 
@@ -103,6 +105,7 @@ public class Customer {
 
 		this.customerId = db.setCustomer(this);
 
+		System.out.printf("Success! Customer with the id %d has been added.\n", this.customerId);
 	}
 
 
@@ -125,7 +128,8 @@ public class Customer {
 				}
 				break;
 			} catch (NullPointerException e) {
-				System.out.println("Please select a valid account!");
+				System.out.println("Not a valid account.");
+				break;
 			}
 		}
 	}
