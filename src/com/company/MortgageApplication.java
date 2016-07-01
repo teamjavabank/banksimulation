@@ -5,11 +5,11 @@ import java.util.*;
 
 public class MortgageApplication {
 
-	double amount;
-	String newAccountType;
-	int newCustomerId;
-	Database db;
-	double yearlyPay;
+	private double amount;
+	private String newAccountType;
+	private int newCustomerId;
+	private Database db;
+	private double yearlyPay;
 
 	public MortgageApplication(String newAccountType1, int newCustomerId1, Database db1){
 
