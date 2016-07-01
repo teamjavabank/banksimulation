@@ -274,7 +274,19 @@ public class Customer {
 
 		Customer c = d.getCustomer(customerId);
 
-		c.AccountList.remove(accountId - 1000);
+		List <Integer> accList = c.AccountList;
+		
+		for (int i = 0; i < accList.size(); i++)
+		{
+			
+			if (accList.get(i) == accountId)
+			{
+				
+				c.AccountList.remove(i);
+				
+			}
+			
+		}
 
 	}
 
