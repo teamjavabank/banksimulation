@@ -113,17 +113,19 @@ public class Customer {
 	// -------------------------------------------------
 	public static void showPersonDetails (int customerId, Database db)
 	{
+		while(true) {
+			try {
+				Customer details = db.getCustomer(customerId);
 
-		Customer details = db.getCustomer(customerId);
-
-		System.out.println("Customer " + details.customerId + ": " + details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
-
-		if (!details.AccountList.isEmpty()){
-			for (int account: details.AccountList)
-			{
-
-				System.out.println("Account " + account + ": " + Account.getBalance(account, db) + " EUR.");
-
+				System.out.println("Customer " + details.customerId + ": " + details.name + ", " + details.address + ", " + details.phone + ", " + details.sex + ", " + details.dob);
+				if (!details.AccountList.isEmpty()) {
+					for (int account : details.AccountList) {
+						System.out.println("Account " + account + ": " + Account.getBalance(account, db) + " EUR.");
+					}
+				}
+				break;
+			} catch (NullPointerException e) {
+				System.out.println("Please select a valid account!");
 			}
 		}
 	}
