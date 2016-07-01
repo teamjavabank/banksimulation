@@ -199,7 +199,7 @@ public class Customer {
 				System.out.println("Insert new value!");
 				while (updatecheck[3] == false) {
 					newvalue = (String) inputScanner.next();
-					if (newvalue.equals("male") || newvalue.equals("female") || inputs.equals("Male") || inputs.equals("Female")) {
+					if (newvalue.equals("male") || newvalue.equals("female") || newvalue.equals("Male") || newvalue.equals("Female")) {
 						newCustomer.sex = newvalue;
 						updatecheck[3] = true;
 					} else {

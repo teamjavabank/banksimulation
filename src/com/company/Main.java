@@ -215,9 +215,9 @@ public class Main {
 						if (acc.getAccType().equals("mortgage"))
 						{
 
-							double balance = Mortgage.endMortgagePay(input, db);
+							double toPay = Mortgage.endMortgagePay(input, db);
 
-							double diff = balance - Account.getBalance(input, db);
+							double diff = Math.abs(toPay - Account.getBalance(input, db));
 
 							System.out.println("To close the Mortgage account the customer needs to pay an additional " + diff + " EUR.");
 							System.out.println("Press (1) to pay, press (2) if the customer is not able to.");

@@ -23,7 +23,7 @@ public class Mortgage extends Account {
 	public static double endMortgagePay(int accountId, Database db1){
 		double bal = Account.getBalance(accountId, db1);
 
-		System.out.println("You will have to pay "+ bal*1.0735 + "€ to end the mortgage");
+		System.out.println("You will have to pay "+ Math.abs(bal*1.0735) + "€ to end the mortgage");
 		return bal*1.0735;
 	}
 
