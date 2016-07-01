@@ -2,7 +2,6 @@ package com.company;
 
 import java.util.*;
 
-
 public class MortgageApplication {
 
 	private double amount;
@@ -11,6 +10,7 @@ public class MortgageApplication {
 	private Database db;
 	private double yearlyPay;
 
+	// constructor
 	public MortgageApplication(String newAccountType1, int newCustomerId1, Database db1){
 
 		newAccountType = newAccountType1;
@@ -18,6 +18,7 @@ public class MortgageApplication {
 		db = db1;
 		yearlyPay =0;
 
+		// call functions to go through the application process
 		interview();
 		mortgageConditions();
 		if(yearlyPay == 0){
@@ -28,8 +29,9 @@ public class MortgageApplication {
 
 	}
 
-
+	// simulate interview
 	private void interview(){
+		
 		Scanner inputScanner = new Scanner(System.in);
 		String inputs;
 		int done = 0;
@@ -46,6 +48,7 @@ public class MortgageApplication {
 		}
 	}
 
+	// set the mortgage conditions
 	private void mortgageConditions(){
 
 
@@ -81,6 +84,7 @@ public class MortgageApplication {
 		}
 	}
 
+	// actually start the mortgage
 	private void makeMortage(){
 
 		Mortgage m = new Mortgage( newAccountType, newCustomerId, db);
