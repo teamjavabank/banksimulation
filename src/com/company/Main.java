@@ -275,7 +275,7 @@ public class Main {
 				}
 			}
 
-		} else if (id.equals("2000") && PIN.equals("1101")) {
+		} else if (id.equals("2000") && PIN.equals("1234")) {
 
 			boolean menuActive = true;
 
@@ -321,7 +321,7 @@ public class Main {
 			}
 
 		} else {
-			System.out.println("\nLogin was not successful, please try again.\n");
+			System.out.println("\nLogin was not successful, please try again.");
 		}
 
 	}
