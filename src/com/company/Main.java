@@ -137,7 +137,7 @@ public class Main {
 							   		break;
 							   		
 							   	case 1:
-							   		System.out.println("What kind of account to you want to create?");
+							   		System.out.println("What kind of account do you want to create?");
 							   		System.out.println("Press a number to select your desired function: Current (1), Junior Current (2), Student Savings (3), Corporate Savings (4), Mortgage (5)");
 							   		System.out.println("To leave the menu press 0.");
 							   		
@@ -213,8 +213,6 @@ public class Main {
 							   		
 							   		Account acc = db.getAccount(input);
 							   		
-							   		System.out.println(acc.getAccType());
-							   		
 							   		if (acc.getAccType().equals("mortgage"))
 							   		{
 							   			
@@ -285,7 +283,7 @@ public class Main {
 		   	while(menuActive)
 		   	{
 		   		System.out.println("You have logged in as the manager.");
-	    		System.out.println("Press (1) to access the transaction logs.");
+	    		System.out.println("Press (1) to access the transaction logs, press (2) to see all customers and their balances.");
 	            System.out.println("To leave the menu press 0.");
 		   		
 	            int input = inputScanner.nextInt();
@@ -302,6 +300,20 @@ public class Main {
 			   		Transaction.showTransactionLog(db);
 			   		
 					break;
+					
+			   	case 2:
+			   		
+			   		Map<Integer, Customer> customerList = db.getCustomerList();
+			   		
+			   		for (Map.Entry<Integer, Customer> entry: customerList.entrySet())
+			   		{
+			   			
+			   			Customer.showPersonDetails(entry.getKey(), db);
+			   			
+			   		}
+			   		
+			   		
+			   		break;
 			   	
 			    default:
 			        System.out.println("Please select a valid option!");

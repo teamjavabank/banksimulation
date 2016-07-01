@@ -37,6 +37,11 @@ public class Database {
 	public Customer removeCustomer (int customerId) {
 		return customerList.remove(customerId);
 	}
+	
+	//getCustomerList
+	public Map<Integer, Customer> getCustomerList () {
+		return customerList;
+	}
 
 	/* --- Account --- */
 
