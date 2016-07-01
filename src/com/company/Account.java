@@ -2,7 +2,6 @@ package com.company;
 
 public class Account {
 
-
 	protected double balance;
 	private int creditLimit;
 	private double interestRate;
@@ -10,6 +9,7 @@ public class Account {
 	private int customerId;
 	private int accountId;
 
+	// constructor
 	public Account (String newAccountType, int newCustomerId, Database db) {
 		this.accountType = newAccountType;
 		this.customerId = newCustomerId;
@@ -63,6 +63,7 @@ public class Account {
 		this.creditLimit = creditLimit;
 	}
 
+	// getter for credit limit
 	public static int getCreditLimit (int accountId, Database db)
 	{
 
@@ -72,6 +73,7 @@ public class Account {
 
 	}
 
+	// get the account type
 	public String getAccType ()
 	{
 

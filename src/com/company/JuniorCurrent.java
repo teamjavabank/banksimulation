@@ -7,6 +7,7 @@ public class JuniorCurrent extends Account {
 
 	private int GuardianId;
 
+	// constructor
 	public JuniorCurrent(String newAccountType, int newCustomerId, int GuardianId, Database db) {
 		super(newAccountType, newCustomerId, db);
 
@@ -29,8 +30,7 @@ public class JuniorCurrent extends Account {
 
 	}
 
-
-
+	// function to check if the customer is allowed to open the account
 	public static boolean isAllowed(String dob) {
 
 
@@ -47,8 +47,6 @@ public class JuniorCurrent extends Account {
 		double diffinMS = today.getTime() - dateob.getTime();
 		double diffinYears = diffinMS/(1000*60*60*24);
 		diffinYears = diffinYears/365;
-
-
 
 		if(diffinYears >= 16){
 			return false;

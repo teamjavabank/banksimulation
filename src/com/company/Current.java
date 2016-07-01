@@ -2,6 +2,7 @@ package com.company;
 
 public class Current extends Account{
 
+	// constructor
 	public Current(String newAccountType, int newCustomerId, Database db) {
 		super(newAccountType, newCustomerId, db);
 

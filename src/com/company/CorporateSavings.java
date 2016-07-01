@@ -2,6 +2,7 @@ package com.company;
 
 public class CorporateSavings extends Account{
 
+	// constructor
 	public CorporateSavings(String newAccountType, int newCustomerId, Database db) {
 		super(newAccountType, newCustomerId, db);
 
