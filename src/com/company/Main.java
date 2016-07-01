@@ -25,11 +25,17 @@ public class Main {
 		System.out.println("Created computed accounts\n");
 
 		new Transaction (0, 1000, 2500, db);
+		System.out.println("Success! Transaction with the id 1000 has been made.");
 		new Transaction (0, 1001, 2300, db);
+		System.out.println("Success! Transaction with the id 1001 has been made.");
 		new Transaction (0, 1002, 500, db);
+		System.out.println("Success! Transaction with the id 1002 has been made.");
 		new Transaction (0, 1003, 200, db);
+		System.out.println("Success! Transaction with the id 1003 has been made.");
 		new Transaction (1001, 1003, 500, db);
+		System.out.println("Success! Transaction with the id 1004 has been made.");
 		new Transaction (1002, 0, 20, db);
+		System.out.println("Success! Transaction with the id 1005 has been made.");
 		System.out.println("Created computed transactions\n");
 
 		while (true)
